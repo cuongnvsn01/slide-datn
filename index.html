@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Slide DATN - SparkleBooth Photobooth Kiosk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="deck-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="badge">DATN 2026</span>
+        <span class="brand-title">Báo Cáo Đồ Án Tốt Nghiệp</span>
+      </div>
+      <div class="top-actions">
+        <button id="themeBtn" class="icon-btn" title="Đổi giao diện sáng/tối">☀</button>
+        <button id="notesBtn" class="icon-btn" title="Mở kịch bản thuyết trình">📝</button>
+        <button id="overviewBtn" class="icon-btn" title="Xem tổng quan slide">📑</button>
+        <button id="fullscreenBtn" class="icon-btn" title="Toàn màn hình">⛶</button>
+      </div>
+    </header>
+
+    <main class="stage" aria-live="polite">
+      <section class="slide cover active" data-title="Cover" data-notes="Kính chào Quý Thầy Cô trong Hội đồng. Em là Nguyễn Văn Cường, lớp 65PM5. Em xin trình bày đồ án tốt nghiệp với đề tài Xây dựng hệ thống PhotoBooth Kiosk tự động phục vụ sự kiện, tên sản phẩm SparkleBooth.">
+        <div class="cover-grid">
+          <div>
+            <p class="eyebrow">Trường Đại Học Xây Dựng Hà Nội - Khoa Công Nghệ Thông Tin</p>
+            <h1>Xây Dựng Hệ Thống PhotoBooth Kiosk Tự Động Phục Vụ Sự Kiện</h1>
+            <p class="lead">SparkleBooth - tự động hóa trải nghiệm chụp ảnh, chỉnh sửa, in ảnh vật lý và chia sẻ ảnh số qua Web Gallery.</p>
+            <div class="info-strip">
+              <div><span>Sinh viên</span><strong>Nguyễn Văn Cường</strong></div>
+              <div><span>MSSV - Lớp</span><strong>26265 - 65PM5</strong></div>
+              <div><span>GV hướng dẫn</span><strong>ThS. Phan Hữu Trung</strong></div>
+            </div>
+          </div>
+          <div class="hero-visual" aria-label="Minh họa hệ thống Photobooth">
+            <div class="booth-screen">
+              <div class="camera-dot"></div>
+              <div class="photo-grid">
+                <span></span><span></span><span></span><span></span>
+              </div>
+              <div class="qr-mini"></div>
+            </div>
+            <div class="floating-card card-a">DSLR / Webcam</div>
+            <div class="floating-card card-b">Canvas 300 DPI</div>
+            <div class="floating-card card-c">QR Gallery</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Agenda" data-notes="Nội dung bài thuyết trình được tổ chức theo cấu trúc báo cáo: giới thiệu đề tài, phân tích yêu cầu, thiết kế hệ thống, cài đặt kiểm thử và tổng kết.">
+        <p class="chapter">Agenda</p>
+        <h2>Cấu Trúc Báo Cáo Bảo Vệ</h2>
+        <div class="agenda-grid">
+          <article><b>01</b><h3>Giới thiệu đề tài</h3><p>Bối cảnh, lý do chọn đề tài, khái niệm Photobooth Kiosk và giải pháp đề xuất.</p></article>
+          <article><b>02</b><h3>Phân tích yêu cầu</h3><p>Tác nhân, use case, luồng Event Mode, Normal Mode, Web Gallery và License.</p></article>
+          <article><b>03</b><h3>Thiết kế hệ thống</h3><p>Kiến trúc tổng thể, cơ sở dữ liệu, API, UI/UX, thuật toán và mã nguồn.</p></article>
+          <article><b>04</b><h3>Cài đặt & kiểm thử</h3><p>Môi trường triển khai, test case, hiệu năng, bảo mật và vận hành thiết bị.</p></article>
+          <article><b>05</b><h3>Kết quả đạt được</h3><p>Sản phẩm Kiosk, backend API, Web Gallery, license và đánh giá hoàn thành.</p></article>
+          <article><b>06</b><h3>Tổng kết</h3><p>Hạn chế, hướng phát triển và kết luận chung.</p></article>
+        </div>
+      </section>
+
+      <section class="slide section-slide" data-title="Chương I" data-notes="Bắt đầu Chương I: giới thiệu đề tài và đề xuất giải pháp.">
+        <span>01</span>
+        <h2>Giới Thiệu Đề Tài & Đề Xuất Giải Pháp</h2>
+        <p>SparkleBooth - kết hợp trải nghiệm vật lý tại Kiosk và trải nghiệm số sau sự kiện.</p>
+      </section>
+
+      <section class="slide" data-title="Khái quát đề tài" data-notes="SparkleBooth là hệ thống PhotoBooth Kiosk phục vụ sự kiện. Khách có thể tự thao tác trên màn hình cảm ứng để chọn frame, chụp ảnh, in ảnh và quét QR nhận ảnh số.">
+        <p class="chapter">1.1 Giới thiệu đề tài</p>
+        <h2>Khái Quát SparkleBooth</h2>
+        <div class="two-col">
+          <div>
+            <p class="big-text">SparkleBooth là hệ thống PhotoBooth Kiosk tự động phục vụ sự kiện, kết nối giữa ảnh in lấy ngay và album số trực tuyến.</p>
+            <ul class="clean-list">
+              <li>Khách chọn khung ảnh và tự chụp trên màn hình Kiosk.</li>
+              <li>Hỗ trợ camera DSLR hoặc webcam tùy điều kiện vận hành.</li>
+              <li>Ảnh được ghép frame, chỉnh hiệu ứng, in vật lý và upload cloud.</li>
+              <li>Web Gallery cho phép khách quét QR để xem và tải ảnh về điện thoại.</li>
+            </ul>
+          </div>
+          <div class="workflow-card">
+            <div>Chọn Frame</div><span></span>
+            <div>Chụp Ảnh</div><span></span>
+            <div>Ghép + In</div><span></span>
+            <div>QR Gallery</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Lý do chọn đề tài" data-notes="Lý do chọn đề tài đến từ nhu cầu nhận ảnh nhanh tại sự kiện, hạn chế của quy trình thủ công và chi phí tùy biến của các phần mềm Photobooth thương mại.">
+        <p class="chapter">1.2 Lý do chọn đề tài</p>
+        <h2>Vì Sao Chọn Đề Tài Này?</h2>
+        <div class="problem-grid">
+          <article><strong>P1</strong><h3>Nhu cầu chia sẻ tức thì</h3><p>Khách sự kiện muốn nhận ảnh giấy và file ảnh số ngay sau khi chụp.</p></article>
+          <article><strong>P2</strong><h3>Quy trình thủ công chậm</h3><p>Chụp, chỉnh, in và gửi ảnh thủ công dễ tạo hàng chờ khi khách đông.</p></article>
+          <article><strong>P3</strong><h3>Khó tùy biến thương hiệu</h3><p>Phần mềm thương mại thường đắt, khó tùy chỉnh frame theo từng sự kiện Việt Nam.</p></article>
+          <article><strong>P4</strong><h3>Cần giảm nhân sự vận hành</h3><p>Kiosk tự phục vụ giúp kiểm soát luồng khách và giảm phụ thuộc vào kỹ thuật viên.</p></article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Mục tiêu nhiệm vụ" data-notes="Mục tiêu đồ án gồm tự động hóa chụp ảnh kiosk, xử lý hình ảnh và designer tool, lưu trữ cloud, quản trị bản quyền và giám sát hệ thống.">
+        <p class="chapter">1.3 Mục tiêu và nhiệm vụ</p>
+        <h2>Mục Tiêu Của Đồ Án</h2>
+        <div class="kpi-grid">
+          <div><span>01</span><b>Tự động hóa Kiosk</b><p>Khởi động session, countdown, chụp ảnh, retake và chuyển màn tự động.</p></div>
+          <div><span>02</span><b>Xử lý ảnh & Designer</b><p>Thiết kế frame, nhận diện slot, ghép ảnh bằng Canvas và xuất ảnh in.</p></div>
+          <div><span>03</span><b>Cloud & Gallery</b><p>Upload Google Drive, tạo manifest, sinh QR và hiển thị album mobile.</p></div>
+          <div><span>04</span><b>Quản trị & License</b><p>PIN admin, cấu hình thiết bị, Machine ID, Telegram Bot và license key.</p></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Photobooth Kiosk" data-notes="Kiosk điện tử là trạm tự phục vụ. Photobooth Kiosk là biến thể chuyên về chụp ảnh, có camera, đèn, máy in và phần mềm chạy ở chế độ kiosk mode.">
+        <p class="chapter">1.4 Khái niệm nền tảng</p>
+        <h2>Kiosk Và PhotoBooth Kiosk</h2>
+        <div class="split-panels">
+          <article>
+            <h3>Kiosk điện tử</h3>
+            <ul>
+              <li>Trạm máy tính tự phục vụ đặt tại nơi đông người.</li>
+              <li>Thường dùng màn hình cảm ứng và phần cứng chuyên dụng.</li>
+              <li>Chạy chế độ khóa màn hình để tránh can thiệp hệ điều hành.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>PhotoBooth Kiosk</h3>
+            <ul>
+              <li>Trang bị camera DSLR/webcam, đèn hỗ trợ và máy in ảnh.</li>
+              <li>Cho phép khách tự chọn khung, tạo dáng, chụp và nhận ảnh.</li>
+              <li>Tăng trải nghiệm tương tác và cá nhân hóa tại sự kiện.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Giải pháp đề xuất" data-notes="Giải pháp đề xuất gồm ba phân hệ: Kiosk Client, Backend API và Web Gallery public. Các phân hệ phối hợp qua RESTful API, local storage, H2 và Google Drive.">
+        <p class="chapter">1.5 Đề xuất giải pháp</p>
+        <h2>Kiến Trúc Giải Pháp 3 Phân Hệ</h2>
+        <div class="architecture">
+          <div class="node primary">Kiosk Client<br><small>Angular + Electron</small></div>
+          <div class="node primary">Backend API<br><small>Java + Spring Boot</small></div>
+          <div class="node">Thiết bị<br><small>DSLR / Webcam / Printer</small></div>
+          <div class="node">Local Data<br><small>H2 + Media Folder</small></div>
+          <div class="node">Google Drive<br><small>Ảnh + Manifest</small></div>
+          <div class="node">Web Gallery<br><small>Angular + Vercel</small></div>
+          <div class="node">License<br><small>Machine ID + AES</small></div>
+          <div class="node">Telegram Bot<br><small>Yêu cầu kích hoạt</small></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Công nghệ" data-notes="Slide này tóm tắt các công nghệ chính theo báo cáo: backend Spring Boot, frontend Angular/Electron, Canvas, digiCamControl, Google Drive, Vercel, PDFBox và PlantUML.">
+        <p class="chapter">1.6 Công nghệ sử dụng</p>
+        <h2>Ngôn Ngữ, Công Nghệ Và Công Cụ</h2>
+        <div class="tech-stack">
+          <div><b>Backend</b><span>Java, Spring Boot, Spring Data JPA, H2.</span></div>
+          <div><b>Frontend Kiosk</b><span>Angular, TypeScript, Canvas API, Electron.</span></div>
+          <div><b>Camera</b><span>digiCamControl HTTP API, liveview, autofocus, capture.</span></div>
+          <div><b>In ảnh</b><span>Apache PDFBox, Windows Print Spooler, PowerShell.</span></div>
+          <div><b>Cloud Gallery</b><span>Google Drive API, Vercel Function, Angular Gallery.</span></div>
+          <div><b>Tài liệu</b><span>PlantUML cho use case, sequence, activity, ERD.</span></div>
+        </div>
+      </section>
+
+      <section class="slide section-slide" data-title="Chương II" data-notes="Chương II trình bày phạm vi bài toán, tác nhân, use case và các luồng vận hành chính.">
+        <span>02</span>
+        <h2>Khái Quát Bài Toán & Phân Tích Yêu Cầu</h2>
+        <p>Từ tác nhân sử dụng đến các use case nghiệp vụ cốt lõi.</p>
+      </section>
+
+      <section class="slide" data-title="Tác nhân hệ thống" data-notes="Phạm vi đồ án gồm Kiosk cục bộ, backend local, thiết bị camera/máy in, đồng bộ Google Drive và Web Gallery cho khách.">
+        <p class="chapter">2.1 Phạm vi và tác nhân</p>
+        <h2>Tác Nhân Và Phạm Vi Tương Tác</h2>
+        <table class="data-table">
+          <thead><tr><th>Tác nhân</th><th>Vai trò</th><th>Nghiệp vụ chính</th></tr></thead>
+          <tbody>
+            <tr><td>Khách dự sự kiện</td><td>Người thao tác trực tiếp</td><td>Bắt đầu phiên, chọn frame, chụp, retake, in, nhận ảnh QR.</td></tr>
+            <tr><td>Admin / Người thuê Kiosk</td><td>Người vận hành</td><td>Cấu hình PIN, Event Mode, frame, camera, máy in, cleanup.</td></tr>
+            <tr><td>Super Admin</td><td>Bên cấp license</td><td>Sinh key theo Machine ID, xử lý yêu cầu kích hoạt.</td></tr>
+            <tr><td>Hệ thống nền</td><td>Backend worker và dịch vụ tích hợp</td><td>Upload Drive, cập nhật manifest, in ngầm, dọn dữ liệu.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="slide" data-title="Use case tổng hợp" data-notes="Hệ thống có 9 use case chính được hiệu chỉnh theo mã nguồn thực tế, bao phủ toàn bộ luồng khách, admin, gallery và license.">
+        <p class="chapter">2.2 Tổng hợp use case</p>
+        <h2>Danh Sách Use Case Chính</h2>
+        <div class="db-grid">
+          <div><b>UC01 - Bắt đầu phiên chụp</b><span>Welcome đọc cấu hình isEventMode để chuyển đúng luồng.</span></div>
+          <div><b>UC02 - Chụp Event Mode</b><span>Chọn frame sự kiện, chụp theo slot, render nhanh và chuyển kết quả.</span></div>
+          <div><b>UC03 - Chụp Normal Mode</b><span>Chọn layout/frame, chụp, sang edit trước khi in.</span></div>
+          <div><b>UC04 - Chỉnh sửa và in</b><span>Canvas render ảnh, QR layer, finalize và execute print.</span></div>
+          <div><b>UC05 - Quản lý sự kiện/frame</b><span>Tạo event, upload overlay, lưu configJson.</span></div>
+          <div><b>UC06 - Cấu hình thiết bị</b><span>digiCamControl, webcam và Windows Print Spooler.</span></div>
+          <div><b>UC07 - Nhận ảnh Gallery</b><span>QR mở Drive Gallery qua Vercel proxy.</span></div>
+          <div><b>UC08 - Dọn dữ liệu cũ</b><span>PIN + retentionDays, xóa session completed cũ.</span></div>
+          <div><b>UC09 - Kích hoạt license</b><span>Machine ID, AES key, request qua Telegram.</span></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Use case chi tiết" data-notes="Ba use case quan trọng nhất khi trình bày là Event Mode, Normal Mode và Chỉnh sửa/in ảnh vì chúng thể hiện giá trị chính của hệ thống.">
+        <p class="chapter">2.3 Đặc tả use case trọng tâm</p>
+        <h2>Ba Use Case Cốt Lõi</h2>
+        <div class="split-panels">
+          <article>
+            <h3>UC02 - Event Mode</h3>
+            <ul>
+              <li>Khách chọn frame active.</li>
+              <li>Hệ thống tạo session và chụp theo slot.</li>
+              <li>Tự render ảnh final và chuyển trang kết quả.</li>
+              <li>Phù hợp sự kiện đông người cần thao tác nhanh.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>UC03/UC04 - Normal + Edit</h3>
+            <ul>
+              <li>Khách chọn layout, chụp bằng webcam/DSLR.</li>
+              <li>Có thể retake ảnh chưa đạt.</li>
+              <li>Chỉnh filter, sticker, text và frame.</li>
+              <li>Finalize để in và đồng bộ Drive.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Luồng Event Mode" data-notes="Event Mode rút ngắn thao tác: khách chạm màn hình, chọn frame, hệ thống tự chụp đủ ảnh, tự ghép và hiển thị kết quả.">
+        <p class="chapter">2.4 Luồng vận hành</p>
+        <h2>Sequence Nghiệp Vụ Event Mode</h2>
+        <div class="timeline">
+          <div><b>01</b><span>Tap Screen</span><p>Mở frame selector.</p></div>
+          <div><b>02</b><span>Chọn Frame</span><p>Lấy frame active theo event.</p></div>
+          <div><b>03</b><span>Tạo Session</span><p>POST /api/sessions/start.</p></div>
+          <div><b>04</b><span>Chụp Slot</span><p>Countdown + DSLR/Webcam.</p></div>
+          <div><b>05</b><span>Render Final</span><p>Canvas ghép ảnh + frame + QR.</p></div>
+          <div><b>06</b><span>Kết Quả</span><p>QR, in ảnh, chụp tiếp.</p></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Luồng Normal Mode" data-notes="Normal Mode có thêm bước edit thủ công. Luồng này phù hợp khi khách muốn chỉnh ảnh kỹ hơn trước khi in.">
+        <p class="chapter">2.4 Luồng vận hành</p>
+        <h2>Sequence Nghiệp Vụ Normal Mode</h2>
+        <div class="timeline">
+          <div><b>01</b><span>/layout</span><p>Khách chọn frame.</p></div>
+          <div><b>02</b><span>Start Session</span><p>Backend lưu session processing.</p></div>
+          <div><b>03</b><span>/capture</span><p>Chụp đủ số ảnh theo slot.</p></div>
+          <div><b>04</b><span>Retake</span><p>Chụp lại slot chưa đạt.</p></div>
+          <div><b>05</b><span>/edit</span><p>Filter, sticker, text, frame.</p></div>
+          <div><b>06</b><span>/print</span><p>Finalize, in và QR.</p></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Luồng DSLR" data-notes="Camera DSLR được điều khiển gián tiếp. Backend gửi HTTP command đến digiCamControl ở cổng 5513, chờ file ảnh xuất hiện rồi trả URL media cho frontend.">
+        <p class="chapter">2.4 Luồng thiết bị</p>
+        <h2>Luồng Điều Khiển DSLR</h2>
+        <div class="dslr-flow">
+          <div>Frontend<br><small>Bấm chụp</small></div>
+          <span></span>
+          <div>Backend<br><small>/api/camera/capture</small></div>
+          <span></span>
+          <div>digiCamControl<br><small>localhost:5513</small></div>
+          <span></span>
+          <div>DSLR<br><small>Capture JPEG</small></div>
+          <span></span>
+          <div>Media URL<br><small>/media/raw/...</small></div>
+        </div>
+        <p class="note">Backend set `session.folder`, gửi lệnh `capture/capturenoaf`, scan thư mục theo basename, ưu tiên JPG và trả `/media/...`.</p>
+      </section>
+
+      <section class="slide" data-title="Web Gallery" data-notes="Khách nhận ảnh qua QR. QR không trỏ localhost mà trỏ về Web Gallery public, truyền folderId và manifestId để gallery đọc ảnh từ Google Drive.">
+        <p class="chapter">2.4 Luồng nhận ảnh</p>
+        <h2>QR Và Web Gallery</h2>
+        <div class="qr-flow">
+          <div class="qr-large"></div>
+          <div>
+            <ul class="clean-list">
+              <li>Backend tạo Drive folder cho session/event.</li>
+              <li>Tạo file ảnh placeholder và `_manifest.json`.</li>
+              <li>Ảnh final và raw được upload vào cùng folder.</li>
+              <li>Web Gallery nhận `id=driveFolderId` và `m=manifestFileId`.</li>
+              <li>Vercel `/api/drive` proxy Drive API, có Edge cache để giảm quota.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide section-slide" data-title="Chương III" data-notes="Chương III trình bày thiết kế hệ thống: kiến trúc, cơ sở dữ liệu, API, giao diện, mã nguồn và thuật toán.">
+        <span>03</span>
+        <h2>Thiết Kế Hệ Thống</h2>
+        <p>Từ kiến trúc phân hệ đến dữ liệu, API và thuật toán xử lý ảnh.</p>
+      </section>
+
+      <section class="slide" data-title="Kiến trúc tổng thể" data-notes="Backend Spring Boot chạy cục bộ, dùng H2 và thư mục media. Angular Kiosk giao tiếp localhost. Web Gallery tách khỏi Kiosk và chạy public trên Vercel.">
+        <p class="chapter">3.1 Kiến trúc tổng thể</p>
+        <h2>Kiến Trúc Offline-First + Online Gallery</h2>
+        <div class="architecture">
+          <div class="node primary">Electron Kiosk<br><small>Fullscreen touch UI</small></div>
+          <div class="node primary">Angular Frontend<br><small>Routes + Canvas</small></div>
+          <div class="node primary">Spring Boot API<br><small>Session + Device + Print</small></div>
+          <div class="node">H2 File DB<br><small>Settings, events, sessions</small></div>
+          <div class="node">Local Media<br><small>Raw + final images</small></div>
+          <div class="node">digiCamControl<br><small>HTTP Camera API</small></div>
+          <div class="node">Google Drive<br><small>Cloud storage</small></div>
+          <div class="node">Vercel Gallery<br><small>Public mobile album</small></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Cơ sở dữ liệu" data-notes="Cơ sở dữ liệu chính có bảy bảng: events, frames, sessions, captures, prints, settings và stickers. Các quan hệ xoay quanh session và frame.">
+        <p class="chapter">3.2 Thiết kế cơ sở dữ liệu</p>
+        <h2>Các Bảng Dữ Liệu Chính</h2>
+        <div class="db-grid">
+          <div><b>photo_events</b><span>Sự kiện: name, description, folderPath, isActive.</span></div>
+          <div><b>photo_frames</b><span>Frame: overlayUrl, slotCount, width, height, configJson.</span></div>
+          <div><b>photo_sessions</b><span>Phiên chụp: selectedFrame, event, status, driveFolderId, cloudUrl.</span></div>
+          <div><b>photo_captures</b><span>Ảnh raw từng slot: session, filePath, isSelected.</span></div>
+          <div><b>photo_prints</b><span>Ảnh final: finalPhotoPath, cloudFileId, uploadStatus, printCount.</span></div>
+          <div><b>photo_settings</b><span>Cấu hình singleton: PIN, license, camera, Drive, printer, event mode.</span></div>
+          <div><b>stickers</b><span>Sticker chỉnh sửa: name, imageUrl, isActive.</span></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="API backend" data-notes="Tất cả API backend trả về BaseResponse gồm status, message và payload. Các nhóm API chính gồm config, sessions, camera, print, events, frames và cleanup.">
+        <p class="chapter">3.3 Thiết kế API</p>
+        <h2>API Chính Của Backend</h2>
+        <table class="data-table">
+          <thead><tr><th>Endpoint</th><th>Method</th><th>Chức năng</th></tr></thead>
+          <tbody>
+            <tr><td>/api/config</td><td>GET/PUT</td><td>Đọc và cập nhật cấu hình Kiosk.</td></tr>
+            <tr><td>/api/sessions/start</td><td>POST</td><td>Khởi tạo phiên chụp theo frame.</td></tr>
+            <tr><td>/api/sessions/{id}/upload-raw</td><td>POST</td><td>Lưu ảnh raw webcam.</td></tr>
+            <tr><td>/api/camera/*</td><td>GET/POST/PUT</td><td>Diagnostic, liveview, property, capture DSLR.</td></tr>
+            <tr><td>/api/print/finalize</td><td>POST</td><td>Lưu ảnh final, tạo print record, upload Drive.</td></tr>
+            <tr><td>/api/admin/cleanup</td><td>POST</td><td>Dọn dữ liệu cũ sau khi xác thực PIN.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="slide" data-title="BaseResponse" data-notes="BaseResponse chuẩn hóa response để frontend đọc thống nhất. Một số frontend có interceptor unwrap payload, giúp component nhận trực tiếp dữ liệu nghiệp vụ.">
+        <p class="chapter">3.3 Hợp đồng API</p>
+        <h2>Cấu Trúc Response Dùng Chung</h2>
+        <div class="code-tree">
+          <pre>{
+  "status": 1,
+  "message": "success",
+  "payload": {
+    "id": 996,
+    "status": "processing",
+    "cloudUrl": "https://web-save-photo.vercel.app/portfolio?id=..."
+  }
+}</pre>
+        </div>
+        <p class="note">Các API upload dùng `multipart/form-data`; API cấu hình và điều khiển thiết bị dùng JSON body.</p>
+      </section>
+
+      <section class="slide" data-title="UI UX" data-notes="UI/UX được thiết kế theo từng route. Mục tiêu là giảm số lần chạm, nút lớn, phản hồi nhanh, tách rõ màn khách và màn admin.">
+        <p class="chapter">3.4 Thiết kế giao diện</p>
+        <h2>Route Và Màn Hình Chính</h2>
+        <div class="screen-grid">
+          <div><b>/welcome</b><p>Màn chờ, Start, PIN admin, license.</p></div>
+          <div><b>/layout</b><p>Chọn frame/layout cho Normal Mode.</p></div>
+          <div><b>/capture</b><p>Live camera, countdown, retake, chuyển edit.</p></div>
+          <div><b>/event</b><p>Chọn frame sự kiện, chụp nhanh theo slot.</p></div>
+          <div><b>/edit</b><p>Canvas preview, filter, sticker, text, QR.</p></div>
+          <div><b>/print</b><p>Ảnh final, QR, chọn số bản, in ảnh.</p></div>
+          <div><b>/setting</b><p>Camera, event, frame, designer, admin, theme.</p></div>
+          <div><b>/portfolio</b><p>Web Gallery mobile cho khách tải ảnh.</p></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Thuật toán slot" data-notes="Theo tài liệu, thuật toán nhận diện slot hiện tại được hiệu chỉnh theo code thực tế: dùng Canvas ImageData và Union-Find, không phụ thuộc OpenCV.js trong luồng chính.">
+        <p class="chapter">3.5 Thuật toán xử lý ảnh</p>
+        <h2>Nhận Diện Slot Frame Bằng Canvas API</h2>
+        <div class="timeline">
+          <div><b>01</b><span>Input</span><p>PNG overlay hoặc ảnh nền.</p></div>
+          <div><b>02</b><span>Mask</span><p>Alpha/RGB threshold.</p></div>
+          <div><b>03</b><span>Union-Find</span><p>Gom connected components.</p></div>
+          <div><b>04</b><span>Lọc nhiễu</span><p>Bỏ vùng nhỏ hoặc toàn ảnh.</p></div>
+          <div><b>05</b><span>Merge</span><p>Gộp vùng gần nhau.</p></div>
+          <div><b>06</b><span>Output</span><p>LayoutSlot x,y,w,h,order.</p></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Finalize pipeline" data-notes="Pipeline finalize gồm load ảnh raw, đặt vào slot, vẽ overlay frame, vẽ QR layer, xuất JPEG final, gửi backend lưu và in/upload Drive.">
+        <p class="chapter">3.5 Pipeline xử lý ảnh</p>
+        <h2>Ghép Ảnh, In Và Đồng Bộ Drive</h2>
+        <div class="timeline">
+          <div><b>01</b><span>Load ảnh</span><p>Ảnh raw từ Object URL hoặc /media.</p></div>
+          <div><b>02</b><span>Draw slot</span><p>drawImage cover theo configJson.</p></div>
+          <div><b>03</b><span>Overlay</span><p>Vẽ frame PNG lên canvas.</p></div>
+          <div><b>04</b><span>QR layer</span><p>Nhúng link gallery vào ảnh.</p></div>
+          <div><b>05</b><span>Finalize</span><p>POST /api/print/finalize.</p></div>
+          <div><b>06</b><span>Worker</span><p>In ngầm và upload Drive.</p></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Cấu trúc mã nguồn" data-notes="Mã nguồn chia thành ba project độc lập: backend local, frontend kiosk và Web Gallery public.">
+        <p class="chapter">3.6 Cấu trúc mã nguồn</p>
+        <h2>Ba Project Chính</h2>
+        <div class="code-tree">
+          <pre>datn/
+├─ photobooth/              Backend Spring Boot
+│  ├─ controller/           API config, session, camera, print, cleanup
+│  ├─ service/              Nghiệp vụ Drive, camera, in, license, file
+│  ├─ entity/               photo_events, frames, sessions, captures, prints
+│  └─ repository/           JPA repositories
+├─ photobooth-frontend/     Angular Kiosk + Electron shell
+│  ├─ page/                 welcome, layout, capture, event, edit, print, setting
+│  ├─ services/             photo, camera, setting, layout-analysis
+│  └─ core/                 language, interceptor
+└─ luxe-agency-vn/          Web Gallery Angular + Vercel
+   ├─ features/event-gallery
+   ├─ features/portfolio
+   └─ api/drive.js</pre>
+        </div>
+      </section>
+
+      <section class="slide section-slide" data-title="Chương IV" data-notes="Chương IV trình bày cài đặt, kiểm thử, đánh giá hiệu năng và triển khai local/Vercel.">
+        <span>04</span>
+        <h2>Cài Đặt, Kiểm Thử & Đánh Giá</h2>
+        <p>Từ môi trường chạy Kiosk đến test case, hiệu năng và khuyến nghị bảo mật.</p>
+      </section>
+
+      <section class="slide" data-title="Môi trường cài đặt" data-notes="Báo cáo đã rà soát ba mã nguồn chính cùng backend resources và python engine. Kiosk chạy local trên Windows, còn gallery chạy public trên Vercel.">
+        <p class="chapter">4.1 Môi trường cài đặt</p>
+        <h2>Phạm Vi Mã Nguồn Đã Rà Soát</h2>
+        <div class="result-grid">
+          <div><strong>55</strong><span>Backend Java</span><p>Controller, service, entity, repository.</p></div>
+          <div><strong>220</strong><span>Kiosk Frontend</span><p>Route, component, service, designer.</p></div>
+          <div><strong>68</strong><span>Web Gallery</span><p>Portfolio, EventGallery, Drive proxy.</p></div>
+          <div><strong>6</strong><span>Resources</span><p>Config, data init, migration, credentials.</p></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Kiểm thử chức năng" data-notes="Các test case trọng tâm bao phủ khởi động Kiosk, Event Mode, Normal Mode, DSLR, Webcam, finalize, print, Drive Gallery và cleanup.">
+        <p class="chapter">4.2 Kịch bản kiểm thử</p>
+        <h2>Kiểm Thử Chức Năng Trọng Tâm</h2>
+        <table class="data-table">
+          <thead><tr><th>Mã</th><th>Kịch bản</th><th>Kết quả kỳ vọng</th></tr></thead>
+          <tbody>
+            <tr><td>TC01</td><td>Khởi động Kiosk</td><td>Mở /welcome fullscreen sau khi backend sẵn sàng.</td></tr>
+            <tr><td>TC02</td><td>Event Mode</td><td>Start chuyển /event và chụp đủ slot.</td></tr>
+            <tr><td>TC03</td><td>Normal Mode</td><td>/layout → /capture → /edit → /print.</td></tr>
+            <tr><td>TC04</td><td>DSLR Capture</td><td>JPG xuất hiện và map về /media/raw.</td></tr>
+            <tr><td>TC06</td><td>Finalize + QR</td><td>/print/finalize trả printId/cloudUrl.</td></tr>
+            <tr><td>TC09</td><td>Cleanup</td><td>Xóa session completed cũ khi PIN đúng.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="slide" data-title="Hiệu năng tối ưu" data-notes="Hệ thống có nhiều tối ưu: dừng polling khi DSLR chụp, executor riêng cho Drive, executor in ngầm, gallery windowing và LRU cache.">
+        <p class="chapter">4.3 Đánh giá hiệu năng</p>
+        <h2>Các Cơ Chế Tối Ưu</h2>
+        <div class="theory-list">
+          <div><b>LiveView DSLR</b><p>Polling `liveview.jpg` mỗi 50ms; dừng polling khi bấm chụp để tránh xung đột.</p></div>
+          <div><b>Upload Drive</b><p>Executor riêng 2 thread, không chặn thao tác khách khi finalize.</p></div>
+          <div><b>In ảnh</b><p>Đẩy lệnh in ngầm qua spooler, tránh làm treo giao diện Kiosk.</p></div>
+          <div><b>Web Gallery</b><p>Windowing ±2 ảnh, LRU cache 20 ảnh, preload current ±1.</p></div>
+          <div><b>Cleanup</b><p>Retention clamp 1..90 ngày để giảm rủi ro xóa quá rộng.</p></div>
+          <div><b>Upload lớn</b><p>Cấu hình multipart/nginx tăng giới hạn để xử lý ảnh độ phân giải cao.</p></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Triển khai" data-notes="Mô hình triển khai thực tế gồm máy Windows tại sự kiện chạy backend, kiosk, camera, printer; còn Web Gallery deploy public trên Vercel để khách truy cập từ điện thoại.">
+        <p class="chapter">4.4 Triển khai</p>
+        <h2>Local Kiosk Và Web Gallery Vercel</h2>
+        <div class="deploy-map">
+          <article><h3>Backend local</h3><p>Port 8080, H2 file DB, media tại `C:/PhotoBoothData` hoặc bind-mount Docker.</p></article>
+          <article><h3>Frontend Kiosk</h3><p>Angular dev port 4200 hoặc Electron fullscreen packaged app.</p></article>
+          <article><h3>Camera</h3><p>digiCamControl WebServer `localhost:5513`, MJPEG `5514`, cần cấu hình JPEG.</p></article>
+          <article><h3>Printer</h3><p>Windows printer driver, PrintServiceLookup và PowerShell/.NET spooler.</p></article>
+          <article><h3>Web Gallery</h3><p>Deploy Vercel production, QR public không phụ thuộc mạng nội bộ.</p></article>
+          <article><h3>Google Drive</h3><p>Folder per session/event, `_manifest.json`, public access phù hợp để gallery đọc.</p></article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Bảo mật" data-notes="Báo cáo có bảng đánh giá rủi ro: hard-code key, license bypass, H2 console, CORS drive, PIN admin và media local. Đây là phần nên chủ động nói khi phản biện.">
+        <p class="chapter">4.5 Bảo mật và khuyến nghị</p>
+        <h2>Rủi Ro Và Khuyến Nghị Triển Khai</h2>
+        <div class="warning-list">
+          <div><b>Credential hard-code</b><p>Chuyển Drive, Telegram, API key sang biến môi trường.</p></div>
+          <div><b>License demo</b><p>Bật lại `checkLicense()` trong bản production.</p></div>
+          <div><b>H2 Console</b><p>Chỉ bật dev/local, giới hạn firewall.</p></div>
+          <div><b>CORS Gallery</b><p>Giới hạn origin hoặc thêm token nếu thương mại hóa.</p></div>
+          <div><b>PIN Admin</b><p>Hash PIN và lockout sau nhiều lần sai.</p></div>
+          <div><b>Dữ liệu ảnh cá nhân</b><p>Cleanup định kỳ và bảo vệ thư mục media local.</p></div>
+        </div>
+      </section>
+
+      <section class="slide section-slide" data-title="Chương V" data-notes="Chương V tổng kết kết quả đạt được, hạn chế, hướng phát triển và kết luận chung.">
+        <span>05</span>
+        <h2>Tổng Kết</h2>
+        <p>Kết quả đạt được, hạn chế tồn tại và hướng phát triển trong tương lai.</p>
+      </section>
+
+      <section class="slide" data-title="Kết quả đạt được" data-notes="Đồ án đã hoàn thành mục tiêu phân tích, thiết kế, cài đặt và thử nghiệm, được đánh giá trên lý thuyết, sản phẩm thực tế và giá trị ứng dụng.">
+        <p class="chapter">5.1 Kết quả đạt được</p>
+        <h2>Đóng Góp Chính Của Đề Tài</h2>
+        <div class="result-grid">
+          <div><strong>UML</strong><span>Lý thuyết</span><p>Use Case, Sequence, Activity, ERD và kiến trúc đa tầng.</p></div>
+          <div><strong>300 DPI</strong><span>Canvas Engine</span><p>Ghép ảnh thời gian thực chuẩn in 10x15cm.</p></div>
+          <div><strong>30+</strong><span>REST API</span><p>Điều khiển session, config, camera, print, Drive và license.</p></div>
+          <div><strong>Cloud</strong><span>Gallery Online</span><p>Google Drive, manifest, QR và album mobile trên Vercel.</p></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Hoàn thành yêu cầu" data-notes="Các yêu cầu chức năng quan trọng đều đạt: tạo phiên, chụp DSLR/webcam, render canvas, in ảnh, upload Drive, admin PIN, designer và license.">
+        <p class="chapter">5.1 Mức độ hoàn thành</p>
+        <h2>Đánh Giá Hoàn Thành Yêu Cầu</h2>
+        <table class="data-table">
+          <thead><tr><th>Nhóm</th><th>Yêu cầu</th><th>Trạng thái</th></tr></thead>
+          <tbody>
+            <tr><td>Chức năng</td><td>Khởi tạo phiên chụp và chọn layout/frame</td><td>Đạt</td></tr>
+            <tr><td>Chức năng</td><td>Điều khiển webcam/DSLR và lưu ảnh raw</td><td>Đạt</td></tr>
+            <tr><td>Chức năng</td><td>Ghép ảnh Canvas, filter, sticker, text</td><td>Đạt</td></tr>
+            <tr><td>Chức năng</td><td>In ảnh, đồng bộ Drive và sinh QR Album</td><td>Đạt</td></tr>
+            <tr><td>Quản trị</td><td>Admin PIN, Designer Tool và License Machine ID</td><td>Đạt</td></tr>
+            <tr><td>Triển khai</td><td>Electron/Docker local và Web Gallery Vercel</td><td>Đạt</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="slide" data-title="Hạn chế" data-notes="Hạn chế gồm AI beautify chưa tích hợp hoàn chỉnh, UI chưa tối ưu mọi tỉ lệ màn hình, H2 chưa phù hợp nhiều kiosk đồng thời, phụ thuộc Internet và chưa có thanh toán tự động.">
+        <p class="chapter">5.2 Hạn chế tồn tại</p>
+        <h2>Các Điểm Cần Cải Thiện</h2>
+        <div class="warning-list">
+          <div><b>AI Beautify</b><p>MediaPipe/OpenCV mới ở mức thử nghiệm microservice, chưa vào pipeline realtime.</p></div>
+          <div><b>UI/UX đa màn hình</b><p>Một số layout có thể lệch khi chạy màn dọc 9:16 hoặc màn nhỏ.</p></div>
+          <div><b>H2 Database</b><p>Phù hợp kiosk đơn lẻ, chưa đồng bộ realtime giữa nhiều Kiosk.</p></div>
+          <div><b>Internet sự kiện</b><p>Tốc độ QR/Gallery phụ thuộc băng thông 4G/5G/Wi-Fi tại địa điểm.</p></div>
+          <div><b>Thanh toán</b><p>Chưa tích hợp MoMo, VNPay, ZaloPay, VietQR cho in thêm.</p></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Hướng phát triển" data-notes="Hướng phát triển gồm thanh toán QR, AI/AR filter, tách nền, smile detection, video booth 360 và GIF slow-motion.">
+        <p class="chapter">5.3 Hướng phát triển</p>
+        <h2>Định Hướng Nâng Cấp</h2>
+        <div class="future-roadmap">
+          <div><b>01</b><span>Smart QR Payment</span><p>Tích hợp MoMo, VNPay, ZaloPay, VietQR để mua thêm bản in.</p></div>
+          <div><b>02</b><span>AI Background Removal</span><p>Tách nền tự động và thay bối cảnh sự kiện.</p></div>
+          <div><b>03</b><span>Smile Detection</span><p>MediaPipe phát hiện nụ cười để tự động bấm máy.</p></div>
+          <div><b>04</b><span>AR Filter 3D</span><p>Sticker 3D bám theo khuôn mặt trong liveview.</p></div>
+          <div><b>05</b><span>Video Booth 360</span><p>Điều khiển tay quay 360, xuất video MP4/GIF.</p></div>
+          <div><b>06</b><span>Cloud Sync nâng cao</span><p>Đồng bộ nhiều kiosk và dashboard thống kê sự kiện.</p></div>
+        </div>
+      </section>
+
+      <section class="slide thanks" data-title="Cảm ơn" data-notes="Kết thúc bài trình bày, cảm ơn Hội đồng và sẵn sàng trả lời câu hỏi phản biện.">
+        <p class="eyebrow">Khoa Công Nghệ Thông Tin - HUCE</p>
+        <h2>Xin Trân Trọng Cảm Ơn!</h2>
+        <p>Em xin chân thành cảm ơn Quý Thầy Cô đã lắng nghe phần trình bày.</p>
+        <strong>Em xin sẵn sàng lắng nghe nhận xét và trả lời câu hỏi của Hội đồng.</strong>
+      </section>
+    </main>
+
+    <aside id="notesPanel" class="notes-panel">
+      <div class="panel-head">
+        <h3>Kịch Bản Thuyết Trình</h3>
+        <button id="closeNotes" class="icon-btn">✕</button>
+      </div>
+      <p id="notesText"></p>
+    </aside>
+
+    <div id="overview" class="overview">
+      <div class="overview-head">
+        <h3>Tổng Quan Tất Cả Slide</h3>
+        <button id="closeOverview" class="icon-btn">✕</button>
+      </div>
+      <div id="overviewGrid" class="overview-grid"></div>
+    </div>
+
+    <footer class="nav-footer">
+      <button id="prevBtn" class="nav-btn">← Trang Trước</button>
+      <div class="progress-wrap">
+        <span id="counter">Slide 1 / 1</span>
+        <div class="progress"><span id="progressBar"></span></div>
+      </div>
+      <button id="nextBtn" class="nav-btn">Trang Sau →</button>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
