@@ -110,7 +110,7 @@
         <div class="kpi-grid">
           <div><span>01</span><b>Tự động hóa Kiosk</b><p>Khởi động session, countdown, chụp ảnh, retake và chuyển màn tự động.</p></div>
           <div><span>02</span><b>Xử lý ảnh & Designer</b><p>Thiết kế frame, nhận diện slot, ghép ảnh bằng Canvas và xuất ảnh in.</p></div>
-          <div><span>03</span><b>Cloud & Gallery</b><p>Upload Google Drive, tạo manifest, sinh QR và hiển thị album mobile.</p></div>
+          <div><span>03</span><b>Cloud & Gallery</b><p>Backend upload Google Drive, tạo URL QR; Gallery đọc ảnh theo folderId qua Vercel proxy.</p></div>
           <div><span>04</span><b>Quản trị & License</b><p>PIN admin, cấu hình thiết bị, Machine ID, Telegram Bot và license key.</p></div>
         </div>
       </section>
@@ -138,19 +138,32 @@
         </div>
       </section>
 
-      <section class="slide" data-title="Giải pháp đề xuất" data-notes="Giải pháp đề xuất gồm ba phân hệ: Kiosk Client, Backend API và Web Gallery public. Các phân hệ phối hợp qua RESTful API, local storage, H2 và Google Drive.">
+      <section class="slide" data-title="Giải pháp đề xuất" data-notes="Giải pháp thực tế của dự án là local-first Kiosk. Máy tại sự kiện chạy Angular Kiosk và Spring Boot backend cục bộ để không phụ thuộc hoàn toàn vào Internet khi chụp và in. Phần cloud chỉ phục vụ chia sẻ ảnh qua Google Drive và Web Gallery Vercel.">
         <p class="chapter">1.5 Đề xuất giải pháp</p>
-        <h2>Kiến Trúc Giải Pháp 3 Phân Hệ</h2>
-        <div class="architecture">
-          <div class="node primary">Kiosk Client<br><small>Angular + Electron</small></div>
-          <div class="node primary">Backend API<br><small>Java + Spring Boot</small></div>
-          <div class="node">Thiết bị<br><small>DSLR / Webcam / Printer</small></div>
-          <div class="node">Local Data<br><small>H2 + Media Folder</small></div>
-          <div class="node">Google Drive<br><small>Ảnh + Manifest</small></div>
-          <div class="node">Web Gallery<br><small>Angular + Vercel</small></div>
-          <div class="node">License<br><small>Machine ID + AES</small></div>
-          <div class="node">Telegram Bot<br><small>Yêu cầu kích hoạt</small></div>
+        <h2>Giải Pháp Theo Mã Nguồn Thực Tế</h2>
+        <div class="solution-grid">
+          <article>
+            <b>01</b>
+            <h3>Kiosk chạy tại máy sự kiện</h3>
+            <p><code>photobooth-frontend</code> là Angular 20, chạy qua Nginx/Docker ở <code>localhost:4200</code> hoặc đóng gói Electron để mở fullscreen. Frontend đảm nhiệm giao diện cảm ứng, chọn frame, chụp webcam, giữ state phiên và render ảnh final bằng Canvas.</p>
+          </article>
+          <article>
+            <b>02</b>
+            <h3>Backend local xử lý nghiệp vụ</h3>
+            <p><code>photobooth</code> là Spring Boot 4, Java 17, chạy cổng <code>8080</code>. Backend tạo session, lưu H2 file DB, lưu ảnh vào <code>PhotoBoothData</code>, điều khiển DSLR, in ảnh, upload Drive, quản lý PIN/license và cleanup.</p>
+          </article>
+          <article>
+            <b>03</b>
+            <h3>Thiết bị ngoại vi đi qua adapter</h3>
+            <p>Webcam dùng Browser MediaDevices. DSLR không điều khiển trực tiếp từ trình duyệt mà qua digiCamControl HTTP API <code>localhost:5513</code>. Máy in dùng PDFBox kết hợp PowerShell/.NET Print Spooler.</p>
+          </article>
+          <article>
+            <b>04</b>
+            <h3>Cloud chỉ phục vụ nhận ảnh số</h3>
+            <p>Backend tạo folder/file trên Google Drive và sinh <code>cloudUrl</code>. Web <code>luxe-agency-vn</code> chạy Angular 21/Vercel, mở <code>/portfolio?id=folderId&m=manifestId</code>; hiện gallery liệt kê ảnh qua <code>/api/drive</code> theo <code>folderId</code>.</p>
+          </article>
         </div>
+        <p class="note">Tóm lại: phần chụp và in ưu tiên chạy local ổn định; phần Internet chỉ cần cho upload Drive và khách quét QR xem ảnh online.</p>
       </section>
 
       <section class="slide" data-title="Công nghệ" data-notes="Slide này tóm tắt các công nghệ chính theo báo cáo: backend Spring Boot, frontend Angular/Electron, Canvas, digiCamControl, Google Drive, Vercel, PDFBox và PlantUML.">
@@ -267,21 +280,21 @@
           <span></span>
           <div>Media URL<br><small>/media/raw/...</small></div>
         </div>
-        <p class="note">Backend set `session.folder`, gửi lệnh `capture/capturenoaf`, scan thư mục theo basename, ưu tiên JPG và trả `/media/...`.</p>
+        <p class="note">Backend set <code>session.folder</code>, gửi lệnh <code>capture/capturenoaf</code>, scan thư mục theo basename, ưu tiên JPG và trả <code>/media/...</code>.</p>
       </section>
 
-      <section class="slide" data-title="Web Gallery" data-notes="Khách nhận ảnh qua QR. QR không trỏ localhost mà trỏ về Web Gallery public, truyền folderId và manifestId để gallery đọc ảnh từ Google Drive.">
+      <section class="slide" data-title="Web Gallery" data-notes="Khách nhận ảnh qua QR. QR không trỏ localhost mà trỏ về Web Gallery public. Theo code hiện tại, gallery nhận folderId và manifestId, nhưng danh sách ảnh đang được lấy qua Vercel api/drive theo folderId; manifestId được truyền để đồng bộ và mở rộng nhưng chưa phải nguồn đọc chính.">
         <p class="chapter">2.4 Luồng nhận ảnh</p>
         <h2>QR Và Web Gallery</h2>
         <div class="qr-flow">
           <div class="qr-large"></div>
           <div>
             <ul class="clean-list">
-              <li>Backend tạo Drive folder cho session/event.</li>
-              <li>Tạo file ảnh placeholder và `_manifest.json`.</li>
+              <li>Backend tạo Drive folder cho session/event khi bật upload Drive.</li>
+              <li>Tạo file ảnh placeholder và <code>_manifest.json</code> để giữ fileId/manifestId ổn định.</li>
               <li>Ảnh final và raw được upload vào cùng folder.</li>
-              <li>Web Gallery nhận `id=driveFolderId` và `m=manifestFileId`.</li>
-              <li>Vercel `/api/drive` proxy Drive API, có Edge cache để giảm quota.</li>
+              <li>Web Gallery nhận <code>id=driveFolderId</code> và <code>m=manifestFileId</code> trên URL <code>/portfolio</code>.</li>
+              <li>Thực tế code Gallery hiện liệt kê ảnh qua Vercel <code>/api/drive?folderId=...</code>, có Edge cache để giảm quota.</li>
             </ul>
           </div>
         </div>
@@ -352,7 +365,7 @@
   }
 }</pre>
         </div>
-        <p class="note">Các API upload dùng `multipart/form-data`; API cấu hình và điều khiển thiết bị dùng JSON body.</p>
+        <p class="note">Các API upload dùng <code>multipart/form-data</code>; API cấu hình và điều khiển thiết bị dùng JSON body.</p>
       </section>
 
       <section class="slide" data-title="UI UX" data-notes="UI/UX được thiết kế theo từng route. Mục tiêu là giảm số lần chạm, nút lớn, phản hồi nhanh, tách rõ màn khách và màn admin.">
@@ -454,7 +467,7 @@
         <p class="chapter">4.3 Đánh giá hiệu năng</p>
         <h2>Các Cơ Chế Tối Ưu</h2>
         <div class="theory-list">
-          <div><b>LiveView DSLR</b><p>Polling `liveview.jpg` mỗi 50ms; dừng polling khi bấm chụp để tránh xung đột.</p></div>
+          <div><b>LiveView DSLR</b><p>Polling <code>liveview.jpg</code> mỗi 50ms; dừng polling khi bấm chụp để tránh xung đột.</p></div>
           <div><b>Upload Drive</b><p>Executor riêng 2 thread, không chặn thao tác khách khi finalize.</p></div>
           <div><b>In ảnh</b><p>Đẩy lệnh in ngầm qua spooler, tránh làm treo giao diện Kiosk.</p></div>
           <div><b>Web Gallery</b><p>Windowing ±2 ảnh, LRU cache 20 ảnh, preload current ±1.</p></div>
@@ -467,12 +480,12 @@
         <p class="chapter">4.4 Triển khai</p>
         <h2>Local Kiosk Và Web Gallery Vercel</h2>
         <div class="deploy-map">
-          <article><h3>Backend local</h3><p>Port 8080, H2 file DB, media tại `C:/PhotoBoothData` hoặc bind-mount Docker.</p></article>
+          <article><h3>Backend local</h3><p>Port 8080, H2 file DB, media tại <code>C:/PhotoBoothData</code> hoặc bind-mount Docker.</p></article>
           <article><h3>Frontend Kiosk</h3><p>Angular dev port 4200 hoặc Electron fullscreen packaged app.</p></article>
-          <article><h3>Camera</h3><p>digiCamControl WebServer `localhost:5513`, MJPEG `5514`, cần cấu hình JPEG.</p></article>
+          <article><h3>Camera</h3><p>digiCamControl WebServer <code>localhost:5513</code>, MJPEG <code>5514</code>, cần cấu hình JPEG.</p></article>
           <article><h3>Printer</h3><p>Windows printer driver, PrintServiceLookup và PowerShell/.NET spooler.</p></article>
           <article><h3>Web Gallery</h3><p>Deploy Vercel production, QR public không phụ thuộc mạng nội bộ.</p></article>
-          <article><h3>Google Drive</h3><p>Folder per session/event, `_manifest.json`, public access phù hợp để gallery đọc.</p></article>
+          <article><h3>Google Drive</h3><p>Folder per session/event, <code>_manifest.json</code>, public access phù hợp để gallery đọc.</p></article>
         </div>
       </section>
 
@@ -481,7 +494,7 @@
         <h2>Rủi Ro Và Khuyến Nghị Triển Khai</h2>
         <div class="warning-list">
           <div><b>Credential hard-code</b><p>Chuyển Drive, Telegram, API key sang biến môi trường.</p></div>
-          <div><b>License demo</b><p>Bật lại `checkLicense()` trong bản production.</p></div>
+          <div><b>License demo</b><p>Bật lại <code>checkLicense()</code> trong bản production.</p></div>
           <div><b>H2 Console</b><p>Chỉ bật dev/local, giới hạn firewall.</p></div>
           <div><b>CORS Gallery</b><p>Giới hạn origin hoặc thêm token nếu thương mại hóa.</p></div>
           <div><b>PIN Admin</b><p>Hash PIN và lockout sau nhiều lần sai.</p></div>
