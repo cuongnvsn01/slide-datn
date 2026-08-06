@@ -233,12 +233,12 @@
         </div>
       </section>
 
-      <section class="slide" data-title="Use case chi tiết" data-notes="Ba use case quan trọng nhất khi trình bày là Event Mode, Normal Mode và Chỉnh sửa/in ảnh vì chúng thể hiện giá trị chính của hệ thống.">
+      <section class="slide" data-title="Use case chi tiết" data-notes="Ba use case trọng tâm khi bảo vệ là UC02 chụp Event Mode, UC03 chụp Normal Mode và UC07 nhận ảnh Gallery. Ba use case này thể hiện đủ vòng đời từ chụp ảnh tại kiosk đến khách nhận ảnh online.">
         <p class="chapter">2.3 Đặc tả use case trọng tâm</p>
         <h2>Ba Use Case Cốt Lõi</h2>
-        <div class="split-panels">
+        <div class="split-panels focus-usecases">
           <article>
-            <h3>UC02 - Event Mode</h3>
+            <h3>UC02 - Chụp Event Mode</h3>
             <ul>
               <li>Khách chọn frame active.</li>
               <li>Hệ thống tạo session và chụp theo slot.</li>
@@ -247,12 +247,21 @@
             </ul>
           </article>
           <article>
-            <h3>UC03/UC04 - Normal + Edit</h3>
+            <h3>UC03 - Chụp Normal Mode</h3>
             <ul>
               <li>Khách chọn layout, chụp bằng webcam/DSLR.</li>
               <li>Có thể retake ảnh chưa đạt.</li>
-              <li>Chỉnh filter, sticker, text và frame.</li>
-              <li>Finalize để in và đồng bộ Drive.</li>
+              <li>Chuyển sang màn edit để chỉnh ảnh.</li>
+              <li>Finalize để in hoặc đồng bộ Drive.</li>
+            </ul>
+          </article>
+          <article>
+            <h3>UC07 - Nhận ảnh Gallery</h3>
+            <ul>
+              <li>Khách quét QR từ màn kết quả hoặc bản in.</li>
+              <li>Gallery mở link public theo folder Drive.</li>
+              <li>Web gọi Vercel API để lấy danh sách ảnh.</li>
+              <li>Khách xem và tải ảnh về điện thoại.</li>
             </ul>
           </article>
         </div>
@@ -310,27 +319,27 @@
         </div>
       </section>
 
-      <section class="slide" data-title="UC04 Edit Print Gallery" data-notes="UC04 nối phần chỉnh ảnh với kết quả vận hành thực tế: render final, lưu print record, gửi lệnh in, upload Drive và cho khách nhận ảnh qua Web Gallery.">
+      <section class="slide" data-title="UC07 Gallery" data-notes="UC07 mô tả luồng khách nhận ảnh online. Backend local tạo cloudUrl có driveFolderId và manifestFileId, sau đó khách quét QR để mở Web Gallery public trên Vercel.">
         <p class="chapter">2.3 Đặc tả use case trọng tâm</p>
-        <h2>UC04 - Sơ Đồ Use Case Chỉnh Sửa, In Và Nhận Ảnh</h2>
+        <h2>UC07 - Sơ Đồ Use Case Nhận Ảnh Gallery</h2>
         <div class="usecase-detail-layout">
           <div class="diagram-card">
             <div class="diagram-header">
-              <span class="diagram-title">Hình 4: Use Case chi tiết - Edit, Print & Gallery</span>
+              <span class="diagram-title">Hình 4: Use Case chi tiết - Nhận ảnh Gallery</span>
               <button class="zoom-btn" type="button">🔍 Phóng to</button>
             </div>
             <div class="diagram-img-wrap">
-              <img src="https://www.plantuml.com/plantuml/svg/NP91Rzim38Nl_XKFFY_T3ZljK1Hmjnos0OknhCU2bPXOY2m5bDIq6FRV1qjMf-naYkyZgIVpBaIIc6RRMJv4H0ynnob26s4LZNTTE1bt9g4PJwHEH_79wS5RBxXC9d97Adf1_tKYDI4awEIEFIXWcpZ4Ad-dLnY71-EqluIi_n3Z8aibjjuVBUDUp3DdFKTLVU0dRCbQbbVyOb5iouoIwfRBablg-_tmuICs-AnDV5Tcu9agsEDt1wJ0YWAZ7oRZ9XoCZInuZn2DEkKeyalC0_R3uzAfBVevyOo3qCnBuzrOkTtOKYCxpGBA_HtPIdrP3YtuBIMSypM5bHTTmJ6VMdAR32ox2SPLAFjhcVtPUjBDA-w7nv9hgLtYYDs85vuNisIMUrRytbzSBlZJvL-8pURsxHtMBsvkRejdV89noYRDNJclIlPvBPRKgXTx3N0rg_YgGSxMTVc_qUhuQjAQMyhA5bqrVpFOn5chsrGNxL_z7JkTPliN" alt="Hình 4: Use Case chi tiết Edit Print Gallery" />
+              <img src="https://www.plantuml.com/plantuml/svg/LLB1Yjim4BtxAnw-PzjROG_BRXq8fQ5jGhtjBKoaIImYQumiRRgK_dkH8oNEIUBDUwCtJ_Cy1l8XzhQoV0W80c-ENO0sdbKmughnPDn0ddhiIPsENgBJZLZnE7ScS4KgY4VzjIFLmNNaGAwhGIDMaSTGwhzuZnLPo_uTh-mLsmld0XNMIkHe6KjltdYgJxTI_Kpgn4x3YgABF2DLCaikIUks-VW92tpBJieBDVvMG1nPqSYeDv43DbjyG2-mnfqmY0y7iKQcncsp-pwmcqkMec0qtWWzGaIxNHVcZnJFEEUkn8060vti8tGiE8ZLxB_e8dePp5onfdVev7TCEQPBYBCSscQtDcEOAtvp3xBxs5y3RvlTg-7pdFIJpDHiSc4uO6yATIbdPuNqFLsWh4JTUWlL2JRRGcyoNFshfe_5Ol5qZIcVU7XukWM2HnYdRDHStR3CU1dCVJa1gMDPY0nbUfhzdZyXIN3Pa3jBKmZvB1tAj7W4_mbfPyesPT5rljczYAVPRiy_izEnj_y1" alt="Hình 4: Use Case chi tiết Nhận ảnh Gallery" />
             </div>
           </div>
           <article class="usecase-notes">
             <h3>Mô tả trọng tâm</h3>
-            <p>Use case này tạo giá trị đầu ra của hệ thống: ảnh được chỉnh trên Canvas, render final, lưu lại bản in, gửi máy in và đồng bộ Google Drive để khách nhận ảnh bằng QR.</p>
+            <p>UC07 là luồng nhận ảnh số sau khi chụp: khách quét QR, Web Gallery đọc tham số trên URL, gọi Vercel API để lấy ảnh trong Google Drive folder và hiển thị album cho khách tải về.</p>
             <ul>
-              <li><b>Tác nhân chính:</b> Khách sử dụng.</li>
-              <li><b>Tác nhân ngoài:</b> Máy in Windows, Google Drive, Web Gallery Vercel.</li>
-              <li><b>Điều kiện trước:</b> Session đã có ảnh raw và frame/layout hợp lệ.</li>
-              <li><b>Kết quả:</b> Ảnh final có thể in và xem/tải online.</li>
+              <li><b>Tác nhân chính:</b> Khách nhận ảnh.</li>
+              <li><b>Tác nhân ngoài:</b> Web Gallery Vercel và Google Drive.</li>
+              <li><b>Điều kiện trước:</b> Backend đã tạo <code>cloudUrl</code>, ảnh đã upload lên Drive hoặc đang đồng bộ.</li>
+              <li><b>Kết quả:</b> Khách xem album và tải ảnh về thiết bị cá nhân.</li>
             </ul>
           </article>
         </div>

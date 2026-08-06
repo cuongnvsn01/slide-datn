@@ -504,6 +504,14 @@ code {
   gap: 24px;
 }
 
+.focus-usecases {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.focus-usecases article {
+  min-height: 310px;
+}
+
 .split-panels li {
   margin: 12px 0;
   color: var(--muted);
