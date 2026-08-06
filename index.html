@@ -59,7 +59,7 @@
           <article><b>01</b><h3>Giới thiệu đề tài</h3><p>Bối cảnh, lý do chọn đề tài, khái niệm Photobooth Kiosk và giải pháp đề xuất.</p></article>
           <article><b>02</b><h3>Phân tích yêu cầu</h3><p>Tác nhân, use case, luồng Event Mode, Normal Mode, Web Gallery và License.</p></article>
           <article><b>03</b><h3>Thiết kế hệ thống</h3><p>Kiến trúc tổng thể, cơ sở dữ liệu, API, UI/UX, thuật toán và mã nguồn.</p></article>
-          <article><b>04</b><h3>Cài đặt & kiểm thử</h3><p>Môi trường triển khai, test case, hiệu năng, bảo mật và vận hành thiết bị.</p></article>
+          <article><b>04</b><h3>Thử nghiệm & đánh giá</h3><p>Môi trường thử nghiệm, test case, kết quả đánh giá, hiệu năng, bảo mật và triển khai.</p></article>
           <article><b>05</b><h3>Kết quả đạt được</h3><p>Sản phẩm Kiosk, backend API, Web Gallery, license và đánh giá hoàn thành.</p></article>
           <article><b>06</b><h3>Tổng kết</h3><p>Hạn chế, hướng phát triển và kết luận chung.</p></article>
         </div>
@@ -634,25 +634,38 @@
         </div>
       </section>
 
-      <section class="slide section-slide" data-title="Chương IV" data-notes="Chương IV trình bày cài đặt, kiểm thử, đánh giá hiệu năng và triển khai local/Vercel.">
+      <section class="slide section-slide" data-title="Chương IV" data-notes="Chương IV trình bày cách thử nghiệm và đánh giá sản phẩm theo các luồng nghiệp vụ chính: Event Mode, Normal Mode, Gallery, camera, in ảnh, Drive và quản trị.">
         <span>04</span>
-        <h2>Cài Đặt, Kiểm Thử & Đánh Giá</h2>
-        <p>Từ môi trường chạy Kiosk đến test case, hiệu năng và khuyến nghị bảo mật.</p>
+        <h2>Thử Nghiệm Và Đánh Giá</h2>
+        <p>Đánh giá sản phẩm theo chức năng, thiết bị, hiệu năng, triển khai và rủi ro vận hành thực tế.</p>
       </section>
 
-      <section class="slide" data-title="Môi trường cài đặt" data-notes="Báo cáo đã rà soát ba mã nguồn chính cùng backend resources và python engine. Kiosk chạy local trên Windows, còn gallery chạy public trên Vercel.">
-        <p class="chapter">4.1 Môi trường cài đặt</p>
-        <h2>Phạm Vi Mã Nguồn Đã Rà Soát</h2>
+      <section class="slide" data-title="Môi trường thử nghiệm" data-notes="Môi trường thử nghiệm bám theo cách triển khai thật: máy Windows chạy Kiosk và backend local, camera/printer kết nối trực tiếp, còn Web Gallery chạy public trên Vercel.">
+        <p class="chapter">4.1 Môi trường thử nghiệm</p>
+        <h2>Phạm Vi Và Môi Trường Đánh Giá</h2>
         <div class="result-grid">
-          <div><strong>55</strong><span>Backend Java</span><p>Controller, service, entity, repository.</p></div>
-          <div><strong>220</strong><span>Kiosk Frontend</span><p>Route, component, service, designer.</p></div>
-          <div><strong>68</strong><span>Web Gallery</span><p>Portfolio, EventGallery, Drive proxy.</p></div>
-          <div><strong>6</strong><span>Resources</span><p>Config, data init, migration, credentials.</p></div>
+          <div><strong>Local</strong><span>Kiosk</span><p>Angular/Electron chạy tại máy sự kiện, giao tiếp backend qua localhost.</p></div>
+          <div><strong>8080</strong><span>Backend</span><p>Spring Boot xử lý session, ảnh, thiết bị, H2 DB và media local.</p></div>
+          <div><strong>Device</strong><span>Ngoại vi</span><p>Webcam, DSLR qua digiCamControl, máy in Windows qua spooler.</p></div>
+          <div><strong>Cloud</strong><span>Gallery</span><p>Google Drive lưu ảnh; Vercel Gallery phục vụ khách quét QR.</p></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Phương pháp thử nghiệm" data-notes="Phương pháp thử nghiệm được chia theo luồng người dùng và luồng thiết bị. Mỗi test case có đầu vào, thao tác, kết quả kỳ vọng và tiêu chí đạt/không đạt.">
+        <p class="chapter">4.2 Phương pháp thử nghiệm</p>
+        <h2>Cách Tổ Chức Thử Nghiệm</h2>
+        <div class="theory-list">
+          <div><b>Theo nghiệp vụ</b><p>Chạy đủ UC02 Event Mode, UC03 Normal Mode và UC07 Nhận ảnh Gallery.</p></div>
+          <div><b>Theo thiết bị</b><p>Kiểm tra webcam, DSLR, liveview, chụp ảnh, in ảnh và quyền truy cập camera.</p></div>
+          <div><b>Theo dữ liệu</b><p>Đối chiếu H2 DB, thư mục media, raw/final image, Drive folder và cloudUrl.</p></div>
+          <div><b>Theo lỗi</b><p>Thử tình huống mất Drive, camera chưa sẵn sàng, file lớn, PIN sai và cleanup.</p></div>
+          <div><b>Theo trải nghiệm</b><p>Đánh giá số thao tác, độ rõ nút bấm, màn hình cảm ứng và luồng quay lại.</p></div>
+          <div><b>Theo triển khai</b><p>Kiểm tra chạy local, Docker/Nginx, Electron fullscreen và Gallery Vercel.</p></div>
         </div>
       </section>
 
       <section class="slide" data-title="Kiểm thử chức năng" data-notes="Các test case trọng tâm bao phủ khởi động Kiosk, Event Mode, Normal Mode, DSLR, Webcam, finalize, print, Drive Gallery và cleanup.">
-        <p class="chapter">4.2 Kịch bản kiểm thử</p>
+        <p class="chapter">4.3 Kịch bản kiểm thử</p>
         <h2>Kiểm Thử Chức Năng Trọng Tâm</h2>
         <table class="data-table">
           <thead><tr><th>Mã</th><th>Kịch bản</th><th>Kết quả kỳ vọng</th></tr></thead>
@@ -667,8 +680,24 @@
         </table>
       </section>
 
+      <section class="slide" data-title="Kết quả đánh giá" data-notes="Kết quả đánh giá cho thấy các luồng cốt lõi đạt yêu cầu đồ án. Những điểm cần lưu ý nằm ở phụ thuộc thiết bị thật, tốc độ upload Drive và cấu hình môi trường Windows.">
+        <p class="chapter">4.4 Kết quả đánh giá</p>
+        <h2>Đánh Giá Theo Nhóm Chức Năng</h2>
+        <table class="data-table">
+          <thead><tr><th>Nhóm đánh giá</th><th>Kết quả</th><th>Nhận xét</th></tr></thead>
+          <tbody>
+            <tr><td>Event Mode</td><td>Đạt</td><td>Luồng chụp nhanh, chọn frame, tạo session và hiển thị kết quả đúng mục tiêu kiosk sự kiện.</td></tr>
+            <tr><td>Normal Mode</td><td>Đạt</td><td>Luồng chọn layout, chụp, retake, edit và print phù hợp khách muốn chỉnh ảnh kỹ hơn.</td></tr>
+            <tr><td>Web Gallery</td><td>Đạt</td><td>QR mở trang public; gallery lấy ảnh từ Google Drive qua Vercel proxy theo folderId.</td></tr>
+            <tr><td>Camera</td><td>Đạt có điều kiện</td><td>Webcam hoạt động qua trình duyệt; DSLR phụ thuộc digiCamControl và cấu hình driver.</td></tr>
+            <tr><td>In ảnh</td><td>Đạt có điều kiện</td><td>In qua Windows printer driver; cần chọn đúng máy in và khổ giấy trước sự kiện.</td></tr>
+            <tr><td>Vận hành</td><td>Cần kiểm soát</td><td>Cần quản lý dung lượng media, cleanup định kỳ và bảo vệ credential Drive.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
       <section class="slide" data-title="Hiệu năng tối ưu" data-notes="Hệ thống có nhiều tối ưu: dừng polling khi DSLR chụp, executor riêng cho Drive, executor in ngầm, gallery windowing và LRU cache.">
-        <p class="chapter">4.3 Đánh giá hiệu năng</p>
+        <p class="chapter">4.5 Đánh giá hiệu năng</p>
         <h2>Các Cơ Chế Tối Ưu</h2>
         <div class="theory-list">
           <div><b>LiveView DSLR</b><p>Polling <code>liveview.jpg</code> mỗi 50ms; dừng polling khi bấm chụp để tránh xung đột.</p></div>
@@ -681,7 +710,7 @@
       </section>
 
       <section class="slide" data-title="Triển khai" data-notes="Mô hình triển khai thực tế gồm máy Windows tại sự kiện chạy backend, kiosk, camera, printer; còn Web Gallery deploy public trên Vercel để khách truy cập từ điện thoại.">
-        <p class="chapter">4.4 Triển khai</p>
+        <p class="chapter">4.6 Triển khai</p>
         <h2>Local Kiosk Và Web Gallery Vercel</h2>
         <div class="deploy-map">
           <article><h3>Backend local</h3><p>Port 8080, H2 file DB, media tại <code>C:/PhotoBoothData</code> hoặc bind-mount Docker.</p></article>
@@ -694,7 +723,7 @@
       </section>
 
       <section class="slide" data-title="Bảo mật" data-notes="Báo cáo có bảng đánh giá rủi ro: hard-code key, license bypass, H2 console, CORS drive, PIN admin và media local. Đây là phần nên chủ động nói khi phản biện.">
-        <p class="chapter">4.5 Bảo mật và khuyến nghị</p>
+        <p class="chapter">4.7 Bảo mật và khuyến nghị</p>
         <h2>Rủi Ro Và Khuyến Nghị Triển Khai</h2>
         <div class="warning-list">
           <div><b>Credential hard-code</b><p>Chuyển Drive, Telegram, API key sang biến môi trường.</p></div>
