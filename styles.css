@@ -545,6 +545,54 @@ code {
   font-weight: 800;
 }
 
+.usecase-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, .75fr);
+  gap: 22px;
+  align-items: stretch;
+}
+
+.usecase-detail-layout .diagram-card {
+  min-height: 0;
+}
+
+.usecase-detail-layout .diagram-img-wrap {
+  max-height: 455px;
+}
+
+.usecase-detail-layout .diagram-img-wrap img {
+  max-height: 430px;
+}
+
+.usecase-notes {
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  border-radius: 20px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.usecase-notes p {
+  margin-top: 10px;
+}
+
+.usecase-notes ul {
+  margin: 16px 0 0;
+  padding-left: 18px;
+}
+
+.usecase-notes li {
+  margin: 10px 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.usecase-notes b {
+  color: var(--text);
+}
+
 .timeline {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -1066,7 +1114,7 @@ code {
   .hero-visual { min-height: 360px; }
   .info-strip, .agenda-grid, .problem-grid, .kpi-grid, .tech-stack, .screen-grid,
   .admin-cards, .result-grid, .db-grid, .future-roadmap, .warning-list, .theory-list,
-  .deploy-map, .split-panels, .architecture, .dslr-flow, .timeline, .usecase, .solution-grid {
+  .deploy-map, .split-panels, .architecture, .dslr-flow, .timeline, .usecase, .solution-grid, .usecase-detail-layout {
     grid-template-columns: 1fr;
   }
   .timeline div { min-height: 130px; }

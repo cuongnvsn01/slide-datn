@@ -163,6 +163,15 @@
             <p>Backend tạo folder/file trên Google Drive và sinh <code>cloudUrl</code>. Web <code>luxe-agency-vn</code> chạy Angular 21/Vercel, mở <code>/portfolio?id=folderId&m=manifestId</code>; hiện gallery liệt kê ảnh qua <code>/api/drive</code> theo <code>folderId</code>.</p>
           </article>
         </div>
+        <div class="diagram-card" style="margin-top: 20px;">
+          <div class="diagram-header">
+            <span class="diagram-title">Hình 21: Kiến trúc phân hệ Photobooth Kiosk</span>
+            <button class="zoom-btn" type="button">🔍 Phóng to</button>
+          </div>
+          <div class="diagram-img-wrap">
+            <img src="https://www.plantuml.com/plantuml/svg/XPG_ZzCm6CRtV8fNOJuX41AY0xhcUhr3dD199tJp6zjDh3fsPCSj5M9034mCY8a94Eg269YRiOZlaM_26oUzfaZ7PR6Tv-VtpsCdnwv2M_b2HP6RIrsYnG9IPFFC6g_vYL76mhrfU0Q4ov6RfTGPp50vCL2ucA5NrTJewWKM0iPMeXheOslDiW_xOFhezF6JWMW5gr1dIYJ6Sc5lmqgg3xCx86ILiVz7l1CCtHrnE5QOta95sd01yRNKv8Q3vzAuUGol8m1cYj9eeIk8JnLrPOs6grme5GCwsBqw1CDsUFai865ng2VKjj0SnfSTGYC1k_eWFdy8oZ1KC4c2Fab8dXb5PKDy4PH2S8cTAFyDVqB7PH4AoRaIIxGYSDtRG_BIIXgkIcEKi87gvz6RY2dZESHdnj0nmiJAHHSdp7RgjKZX31NjMC6vSHLTf03rysYGwyA_eakK2SrMCDWMS5f7D-uU7Jrj7O4HpFEc_YBXzyUc_amtDEriEoGxhqV0ycRpRGKphvHZLWWTTSe-civosTJlIrWqzRe_bbPfYKb2WFhpomDhDciF-VQdpc6n_GfbBhS_z1wK8Lj0BIxlpwIchsAdziwFg6HAzTPJ1pI-qsrrzRgyuNgN2PGQcirtdUyJjFQ624tzgMsQUWTKgI-YrhKMwStTDrtwL4a6It9nnmp3V61TW3xJCNb8_uc_" alt="Hình 21: Kiến trúc phân hệ Photobooth" />
+          </div>
+        </div>
         <p class="note">Tóm lại: phần chụp và in ưu tiên chạy local ổn định; phần Internet chỉ cần cho upload Drive và khách quét QR xem ảnh online.</p>
       </section>
 
@@ -213,6 +222,15 @@
           <div><b>UC08 - Dọn dữ liệu cũ</b><span>PIN + retentionDays, xóa session completed cũ.</span></div>
           <div><b>UC09 - Kích hoạt license</b><span>Machine ID, AES key, request qua Telegram.</span></div>
         </div>
+        <div class="diagram-card" style="margin-top: 20px;">
+          <div class="diagram-header">
+            <span class="diagram-title">Hình 1: Sơ đồ Use Case tổng quát toàn hệ thống SparkleBooth</span>
+            <button class="zoom-btn" type="button">🔍 Phóng to</button>
+          </div>
+          <div class="diagram-img-wrap">
+            <img src="https://www.plantuml.com/plantuml/svg/XPJBRjD058RtVegZiAM5t9e4LL7Jq7GH4IXHn2QRYJtnM1dFMEEPHX5YZLYmu06GY525MX4LbZXYPU0z_2QC9qvnB8LwOVdN-RyvbpdoIIYHaCgd5iLJ2PA3y5mYmV44jgN7cMM5Cuy5I20V9iYUkO8hvdGvvG8UzCoJSuG4ENpkCHUcY8Ou5t7m52agUvp90V8nT8I7Q2xU4OBFisFBlTfPevKBfhKWvb9yoeM3nJvReEj3xZqcP4ik_czH8RPHUCyv3f9eiiTbcIHGwfDuQHDmalLt2DFNp4lMRra9K0Zd2eToQ-muliVW4GpSFz-IzKSF957n3VGz7iwCsnYsxW69Fu6jz9Jj9BeAD3TK0HORax4_dpCihBknGMceYvwby-EIm0l29P-Op-4YbDWlmMiBjcr3QTHzN1wpqoIwbV3hGn9zKH0GBxvXO9DaVHMO5ADkkS1Kngnhuf14dnc1iqlC93pZ3iw0IW6e5e015pwYUQ9Q86eRufqswtckq4DmINmTm8oaqxZKOya6CEhM2cXzp2vKcWTe_3D_6mQRwYlT9gqNo2ETLCzP0Oc_wiIsTWfaA3zUBlvbF2fmZJ4Ra2HQiQozLtW2vuXIB1OPqIWGpJ5xcgpVCxqnqOyWtPjRe6cH2kpVrndKB42jCUl7AxrcX2VHKch0nYpSDjEotbXcrU3We6qkBQygEwgwesexgc5jTdIZwZlgQ4SrTrJBChjuftHEE3mqvyCJE3xsc4sLWzjj7QdkZTIoI4D7fEwImyLBwmGpH_-v_W80" alt="Hình 1: Sơ đồ Use Case tổng quát toàn hệ thống" />
+          </div>
+        </div>
       </section>
 
       <section class="slide" data-title="Use case chi tiết" data-notes="Ba use case quan trọng nhất khi trình bày là Event Mode, Normal Mode và Chỉnh sửa/in ảnh vì chúng thể hiện giá trị chính của hệ thống.">
@@ -240,6 +258,84 @@
         </div>
       </section>
 
+      <section class="slide" data-title="UC02 Event Mode" data-notes="UC02 mô tả luồng chụp nhanh tại sự kiện. Điểm chính là khách thao tác ít, hệ thống tự tạo session, chụp đủ slot, render ảnh final và chuyển sang kết quả.">
+        <p class="chapter">2.3 Đặc tả use case trọng tâm</p>
+        <h2>UC02 - Sơ Đồ Use Case Event Mode</h2>
+        <div class="usecase-detail-layout">
+          <div class="diagram-card">
+            <div class="diagram-header">
+              <span class="diagram-title">Hình 2: Use Case chi tiết - Chụp Event Mode</span>
+              <button class="zoom-btn" type="button">🔍 Phóng to</button>
+            </div>
+            <div class="diagram-img-wrap">
+              <img src="https://www.plantuml.com/plantuml/svg/TL9BQzn03BxxLtpulad9COUICctI4W9DsfoBOcizOiSQCm-7KFhVYn-pksx9JNmFZJvfRcAYa7BlAiVxXEGHfBC9hGHkadYjua5qe40zNgWvTC5dROrtFk3LIkAAckG3wdjBZKMorAFDDIZYBdDCXNxCf4X1C0hhJ7zgUz526-evq8mlPI4Uw0so6Bu7qSIXcWOZxHoZVZOVhh23iNd0bv4ruS6tNEDt1UJ83KL6RQnNx0FrZ9XnAEy_cr-t4tWk_KaUWnLMD3OFHVPZMj6vx3Ftq2xx1YFDIaJdKv4R6b8EcxvtbWUGMkn5oU65j8CX7IaMqnDho-7SytKQ8rd1unCkyKrnkUHCmiF95RFRZ6OemufQyBoEaPRanzcyxgMh_bJpSR3RVJpjOGCjcKk1YukJ4DSGRLnk-Jz-ZRvL573gl1xt35sTI_wjSSMEYYdhluePcpgNtp5_gv9YZNkitijnmzhctlq5" alt="Hình 2: Use Case chi tiết Event Mode" />
+            </div>
+          </div>
+          <article class="usecase-notes">
+            <h3>Mô tả trọng tâm</h3>
+            <p>Event Mode phục vụ sự kiện đông người nên ưu tiên tốc độ: khách chọn frame active, hệ thống tự tạo session, chụp lần lượt theo slot, ghép ảnh final rồi hiển thị QR/in/chụp tiếp.</p>
+            <ul>
+              <li><b>Tác nhân chính:</b> Khách tham dự.</li>
+              <li><b>Tác nhân phụ:</b> Admin cấu hình event/frame, camera, máy in.</li>
+              <li><b>Điều kiện trước:</b> Event mode bật, có frame active, camera sẵn sàng.</li>
+              <li><b>Kết quả:</b> Có ảnh final để in hoặc chia sẻ online.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="UC03 Normal Mode" data-notes="UC03 mô tả luồng chụp thông thường. Khác Event Mode ở chỗ khách chọn layout/frame trước, có thể xem lại, retake ảnh và chuyển sang màn edit để chỉnh kỹ hơn.">
+        <p class="chapter">2.3 Đặc tả use case trọng tâm</p>
+        <h2>UC03 - Sơ Đồ Use Case Normal Mode</h2>
+        <div class="usecase-detail-layout">
+          <div class="diagram-card">
+            <div class="diagram-header">
+              <span class="diagram-title">Hình 3: Use Case chi tiết - Chụp Normal Mode</span>
+              <button class="zoom-btn" type="button">🔍 Phóng to</button>
+            </div>
+            <div class="diagram-img-wrap">
+              <img src="https://www.plantuml.com/plantuml/svg/PP5DJyCm38Rl_HMlUjz0uhR3XAWG1puE0oHko3HU6osDfyHXJ8Z_ZjerMmUtwlNZfxPp7PM2fiuLZjSA5GJRj0fZ0zTgnHTnO_sM0dNue7hJ14dULE8aODTQvO9gbO3olgMwHKmmoJSbAE8kSTHShgZZG4D--Co56wetx0sSrEI6-fWK_G3a6ySeNwlBAynGjMcB9maTEJoAuHBV1P0YrnGPPTMAXwEz9CK5re4w7eIlrVl3a4xX5n94Zj6Apz1pVufpOTg2V0jjMH2TQ4OhsceAF8NVk8CZs_EPMl6dvTq_Oq_rCZYn9rHfmt_GFNj4yWqwyc1ZZx-_DLPNafIBds8uCsQpvMJFiopFUYnZFbyUzyK2rjSkcG4uH7rZVeMJO8Z7nvkae-omwxdji5GcSiC2_AMz-cpAyG0dqzXrN7MYlcPlKkT-0G00" alt="Hình 3: Use Case chi tiết Normal Mode" />
+            </div>
+          </div>
+          <article class="usecase-notes">
+            <h3>Mô tả trọng tâm</h3>
+            <p>Normal Mode phù hợp khi khách muốn kiểm soát nhiều hơn: chọn layout/frame, chụp đủ slot, xem lại từng ảnh, retake nếu ảnh lỗi rồi chuyển sang màn chỉnh sửa.</p>
+            <ul>
+              <li><b>Tác nhân chính:</b> Khách sử dụng kiosk.</li>
+              <li><b>Thiết bị:</b> Webcam hoặc DSLR qua backend local.</li>
+              <li><b>Điều kiện trước:</b> Có layout/frame khả dụng, camera được cấp quyền.</li>
+              <li><b>Kết quả:</b> Bộ ảnh raw gắn với session để đưa vào màn edit.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="slide" data-title="UC04 Edit Print Gallery" data-notes="UC04 nối phần chỉnh ảnh với kết quả vận hành thực tế: render final, lưu print record, gửi lệnh in, upload Drive và cho khách nhận ảnh qua Web Gallery.">
+        <p class="chapter">2.3 Đặc tả use case trọng tâm</p>
+        <h2>UC04 - Sơ Đồ Use Case Chỉnh Sửa, In Và Nhận Ảnh</h2>
+        <div class="usecase-detail-layout">
+          <div class="diagram-card">
+            <div class="diagram-header">
+              <span class="diagram-title">Hình 4: Use Case chi tiết - Edit, Print & Gallery</span>
+              <button class="zoom-btn" type="button">🔍 Phóng to</button>
+            </div>
+            <div class="diagram-img-wrap">
+              <img src="https://www.plantuml.com/plantuml/svg/NP91Rzim38Nl_XKFFY_T3ZljK1Hmjnos0OknhCU2bPXOY2m5bDIq6FRV1qjMf-naYkyZgIVpBaIIc6RRMJv4H0ynnob26s4LZNTTE1bt9g4PJwHEH_79wS5RBxXC9d97Adf1_tKYDI4awEIEFIXWcpZ4Ad-dLnY71-EqluIi_n3Z8aibjjuVBUDUp3DdFKTLVU0dRCbQbbVyOb5iouoIwfRBablg-_tmuICs-AnDV5Tcu9agsEDt1wJ0YWAZ7oRZ9XoCZInuZn2DEkKeyalC0_R3uzAfBVevyOo3qCnBuzrOkTtOKYCxpGBA_HtPIdrP3YtuBIMSypM5bHTTmJ6VMdAR32ox2SPLAFjhcVtPUjBDA-w7nv9hgLtYYDs85vuNisIMUrRytbzSBlZJvL-8pURsxHtMBsvkRejdV89noYRDNJclIlPvBPRKgXTx3N0rg_YgGSxMTVc_qUhuQjAQMyhA5bqrVpFOn5chsrGNxL_z7JkTPliN" alt="Hình 4: Use Case chi tiết Edit Print Gallery" />
+            </div>
+          </div>
+          <article class="usecase-notes">
+            <h3>Mô tả trọng tâm</h3>
+            <p>Use case này tạo giá trị đầu ra của hệ thống: ảnh được chỉnh trên Canvas, render final, lưu lại bản in, gửi máy in và đồng bộ Google Drive để khách nhận ảnh bằng QR.</p>
+            <ul>
+              <li><b>Tác nhân chính:</b> Khách sử dụng.</li>
+              <li><b>Tác nhân ngoài:</b> Máy in Windows, Google Drive, Web Gallery Vercel.</li>
+              <li><b>Điều kiện trước:</b> Session đã có ảnh raw và frame/layout hợp lệ.</li>
+              <li><b>Kết quả:</b> Ảnh final có thể in và xem/tải online.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
       <section class="slide" data-title="Luồng Event Mode" data-notes="Event Mode rút ngắn thao tác: khách chạm màn hình, chọn frame, hệ thống tự chụp đủ ảnh, tự ghép và hiển thị kết quả.">
         <p class="chapter">2.4 Luồng vận hành</p>
         <h2>Sequence Nghiệp Vụ Event Mode</h2>
@@ -250,6 +346,15 @@
           <div><b>04</b><span>Chụp Slot</span><p>Countdown + DSLR/Webcam.</p></div>
           <div><b>05</b><span>Render Final</span><p>Canvas ghép ảnh + frame + QR.</p></div>
           <div><b>06</b><span>Kết Quả</span><p>QR, in ảnh, chụp tiếp.</p></div>
+        </div>
+        <div class="diagram-card" style="margin-top: 18px;">
+          <div class="diagram-header">
+            <span class="diagram-title">Hình 11: Sequence Diagram - Luồng nghiệp vụ Event Mode</span>
+            <button class="zoom-btn" type="button">🔍 Phóng to</button>
+          </div>
+          <div class="diagram-img-wrap">
+            <img src="https://www.plantuml.com/plantuml/svg/XPHDRzD048Rl_XMZSku12GdHGzKc8WLLhMZL2yUDxNXNiNUj_MZ9cGD228cA0-BM3rKHHHLmjGyzkE9_x3zXrkia3YR4aa_ppCmxxuozepIHscHf4AWnupcH98CX2SU958P7VP4A2Oy6zTCY52MHE6CyWH59LToAHF68c5GF1DU798jXLpAIjkAxKegpfkpZmPFdJv-rWZ8EDU596lU4Z6Av2ijH7qdMG2JKGluVCIeEYLfJ9oAQ35TGGTq4DlPfTHdI3I0AzaoiT82fceKi9rnZb0ar1csBImRAbhzWp6pvZjTu7Ll6JoYpnRs6eIq_G4XjUPE3BQwvhzz7KoLPpkZPyYiajFgMmvWQddXGPBbGiLn63whB2J3UAlXACgx_nlQfy8WJVExhfS94GJqUR6vxuR05FLlyqF1mRekf0IqnYG5Fg9im2ppKeW-fBUuuHBK1RhZYtkMY_9OnipJCy-ssu0K6tdBGjFO4pOQHTDSLsd9Abd8x0lkOyv5xlYle1BSY8AUikkKpiq-hYtfiKAdGsAAOpa91AaGE1xRymk3KIT6okckCqbAupw5k0z0TuU4J3fkXDxz_sl8wN33RpKwHULtTchgXMLeyiWsosP9kYojiYpA-avcyV_NjuohVn1caxlwG8Aa6Vw-G6PnoFlOC05ZbOGViJj1l8Tu_wdUjcwIOHu5x5wdDdMBoNdt2tavSWcYMxFPnT1pCmQu9L5GNNjvxT6jUkZbjn5us5--4tKnm2MJIKk0kss-e_8mx7BfxdAj0muOcMtUJHyV0_MqlFfjW1mV5N-iV" alt="Hình 11: Sequence Event Mode" />
+          </div>
         </div>
       </section>
 
@@ -264,11 +369,20 @@
           <div><b>05</b><span>/edit</span><p>Filter, sticker, text, frame.</p></div>
           <div><b>06</b><span>/print</span><p>Finalize, in và QR.</p></div>
         </div>
+        <div class="diagram-card" style="margin-top: 18px;">
+          <div class="diagram-header">
+            <span class="diagram-title">Hình 12: Sequence Diagram - Luồng nghiệp vụ Normal Mode</span>
+            <button class="zoom-btn" type="button">🔍 Phóng to</button>
+          </div>
+          <div class="diagram-img-wrap">
+            <img src="https://www.plantuml.com/plantuml/svg/XPHDQzim6CVl_XGFtNKz30PZFPGseTd6rhAtBw3OYYKYIq6MMtBUOOmnM8vZXpKDfR0jD6Vxi8D3leU-oHx9Jk8qonem23q__V_F6pbA3T4cIqGGf7qk1qIJ1BeaxCTQPJ9gAw4qFEZuNuD86OdK1PSnz8X8QICIqHx9XEaeQSv8Gk5OSo8QyMEjrKKj-wZp-EJ9qqPGqz0G6GlQKZgYUXSsmFn8V0z4GgFq_v4ifI59xz69Y27T7LJWJM3l9Il78Ti3aiApZAOcmAU6Xtn0fC4eLsdV1_tfJf0fwA4FzK37dTwX9jsatZDkypy6khRu326pnVK0R3wHbMSR7sco-Q9bYs-U_2GPfBQO4e-UH1pLDz7JSZm4BXk2hpMNXkhjJ3tYv4QLiL1P5FYIOV-mAWyEe6NpMmFpaSrlCZ0Q7t6GCPPGV4o22a9wNIi-UMNpwo7ssgcxNbOzGGrS1qXiyIDeuFiDBtyDXb45WWnLPfO6o5I97S1pTFuW4NBTCsmnWtENYwnCjlDl8_YbZiAm_8b5i78Qia0eDV1HR3-MLzpuLa0gb0a0jetdNt5g2TQ-cDbY4i9vUGdCdRzZLP7DVs5IDXyhYCgnZDSIX_L8wroMmqQWlczsmEPNhcjL3aIO-Y948-A7C7O1W5rbQcf8dtfafxr05Ou8bL7WlXLOxHE2fpWZICfB2QpyxUqRgxTkyOfVzfWBNBI7aEAUzTt1lRiDQcoxpFcedDpHNkLIRosoB-fbNiVyfhezMyoonXRxYRnv-u-TEMCsdzOo47E_dWuMNFOR0i4HjWF_Fly2" alt="Hình 12: Sequence Normal Mode" />
+          </div>
+        </div>
       </section>
 
       <section class="slide" data-title="Luồng DSLR" data-notes="Camera DSLR được điều khiển gián tiếp. Backend gửi HTTP command đến digiCamControl ở cổng 5513, chờ file ảnh xuất hiện rồi trả URL media cho frontend.">
         <p class="chapter">2.4 Luồng thiết bị</p>
-        <h2>Luồng Điều Khiển DSLR</h2>
+        <h2>Luồng Điều Khiển DSLR & Thiết Bị</h2>
         <div class="dslr-flow">
           <div>Frontend<br><small>Bấm chụp</small></div>
           <span></span>
@@ -280,7 +394,15 @@
           <span></span>
           <div>Media URL<br><small>/media/raw/...</small></div>
         </div>
-        <p class="note">Backend set <code>session.folder</code>, gửi lệnh <code>capture/capturenoaf</code>, scan thư mục theo basename, ưu tiên JPG và trả <code>/media/...</code>.</p>
+        <div class="diagram-card" style="margin-top: 18px;">
+          <div class="diagram-header">
+            <span class="diagram-title">Hình 13: Sequence Diagram - Luồng chuẩn bị sự kiện, frame & thiết bị</span>
+            <button class="zoom-btn" type="button">🔍 Phóng to</button>
+          </div>
+          <div class="diagram-img-wrap">
+            <img src="https://www.plantuml.com/plantuml/svg/XLJDRjD04BxxAKRXsXoGa10zL4sR1g7GAFmzmCIxyQxYx9hTTQfovO0Gui2H4vIgXqf4QWK8OOkJ9TvZtuI9tJHsQAWljhNVttnZUTSwD2wTna5W9r8bQ70A8mmdaT6fOliwrWRkzCghXh02cJwIAe8nnfRNJXWVOngxdbPkW5CE7ICnhfrtZD57Lx9tU_SExZ-e7HeUEbHHpFUqOTniWYMK3wDRG1WwRVuFIIqFqTwYmz3XQ0CgA4sWrM5JgLg05igdW9XEXZ91vQ2rvxDJAkfbkhY3Cpv_1tsfxQGaTD6AaKR3cgI-q61zVWaJwVCtbVR1Z2ltZ0pvka7-4H9HV27rOXuA65DkNiLH61-_ugP9w78h8yLD5U3gvL__bKnlyLGvbmD2UsSL7BPX87msJs3uQD0OCrXXsiIegDkmJzeKzpo1q6TdAOZYgn8t2p_tsOa6eNtsCuHG-FozgjTIDzYfzKFCntykKd2Y-4xLEzbatMZr8earCj0pRc8yXk7WOLDzMIL1XxMkPyKlSbZCBCgXFwWek8QsrpowI2XRd13Fnjf1vFDJ2SNlfjDo8qGuzFad2CiXGf-VbHMy9GrAg5DN6sH5wHVdcWQdHAN75ZnvkhN0quQlKSHOhNHPLhbkScXyU44DjpvDUKJWx0VLMtocZ4IS0wEWLCA6tHVV5k7orp2YJyPLEuD3pNYmonMZ7z5V" alt="Hình 13: Sequence Admin & Thiết bị" />
+          </div>
+        </div>
       </section>
 
       <section class="slide" data-title="Web Gallery" data-notes="Khách nhận ảnh qua QR. QR không trỏ localhost mà trỏ về Web Gallery public. Theo code hiện tại, gallery nhận folderId và manifestId, nhưng danh sách ảnh đang được lấy qua Vercel api/drive theo folderId; manifestId được truyền để đồng bộ và mở rộng nhưng chưa phải nguồn đọc chính.">
@@ -296,6 +418,15 @@
               <li>Web Gallery nhận <code>id=driveFolderId</code> và <code>m=manifestFileId</code> trên URL <code>/portfolio</code>.</li>
               <li>Thực tế code Gallery hiện liệt kê ảnh qua Vercel <code>/api/drive?folderId=...</code>, có Edge cache để giảm quota.</li>
             </ul>
+          </div>
+        </div>
+        <div class="diagram-card" style="margin-top: 18px;">
+          <div class="diagram-header">
+            <span class="diagram-title">Hình 14: Sequence Diagram - Luồng nhận ảnh số qua Web Gallery & Drive</span>
+            <button class="zoom-btn" type="button">🔍 Phóng to</button>
+          </div>
+          <div class="diagram-img-wrap">
+            <img src="https://www.plantuml.com/plantuml/svg/XPDFQzH06CRl-HGlwtaFWY3s8Askku9Mt59GZvF9R6ROoSmoVrfxzk11FEnPH4efnLviyI0anvH-Z_aclfdiaaIetLFW_Jtl-pnFihlM4UDy8PF4BeLQ4KCAI0bTvaPxbJtNKXjuC8s_7c4voVInK3aiYBIiDydOWdZffbgvDwHWi6S4aRtvdZ7wUBFsuVJHYyTFUaF3g2Cgb-oPDXapTs4hz4VoUo12dJR_HxnbbDXxzcJ4aVGEAeb7OFIArwUKZu1Oc7bcNO9I9wXO4ULWj5-VmVm0dAal5OJoJBNa_628lMCfp8YKp9oqczhd8JG9rHVAuIXKvt2p3jLN2aIcleYAjqP__8UVQOrrmiI88nQP-9H4bp1-slZQWRclVpf8GtcDB_HcBKBrMO7ZEfId8a5YZE363TBxeVe1KgXbUnbigAvX6KN9ba91D8FuX_hI0mtbXSSg5GVRLDNMaBGCmj4Lmgz3UNxI3h4lZNOSlxs20kFImQ5MCExTcNJB5m8Z3ouC0c27lp00xl5jXCvsmyLgTk0b0f-Q6h3nZIEqyKs0ucZITHLsYzyp_3Pv_RknhQ7fxmy5XrgnSTEhPvlu44lMMFhjLQY-Dy8UteNScZhiff27QasJNQOo_Fl-1G00" alt="Hình 14: Sequence Web Gallery" />
           </div>
         </div>
       </section>
@@ -319,11 +450,20 @@
           <div class="node">Google Drive<br><small>Cloud storage</small></div>
           <div class="node">Vercel Gallery<br><small>Public mobile album</small></div>
         </div>
+        <div class="diagram-card" style="margin-top: 18px;">
+          <div class="diagram-header">
+            <span class="diagram-title">Hình 23: Sơ đồ triển khai Kiosk local và Web Gallery trên Vercel</span>
+            <button class="zoom-btn" type="button">🔍 Phóng to</button>
+          </div>
+          <div class="diagram-img-wrap">
+            <img src="https://www.plantuml.com/plantuml/svg/XPJDJXin4CVl-nIZz4mNAAWqXufyy2KAej2MyyJhx9fuFLklbn1LFVVSHq0zSUonS4nV96_IiJUBiaYK71BRyvln-FyVPRTqQ5sLwoWg9yeKQ3674Of9QgaooO0qMNYr7puhH9bXGbDbKXYZBkLA995ZhBJR9-DECPVGimhrIhndBKsNPJVsj_RUlbi9MYaScbJBFjb4skUmWll3z0K8XIFxVwGgfS3oXJe9EXmzGqM64WcTa_dj32wLOKbAS8lxMmNbuk4tJDJYuOVf09O-2jyY045vGKOQ1vqzpQ-rPE1OKJa9L7FK1dichJJQceFFHm4DcpPtKLZlI9_81GkbILvVeGrulzvpGlCUw1nkmbXf2SD-G0utEJecpQ-4pg0RdsNao1VBXfmIvp9H6C0JlsfVdQXK3J0ViEkMD7ItjpVUnFvxAsGCETnEQDGwuvOTNpYqwbhMhIwFek-Hq5Gbq3aWIdsR7gdB-LKJ_IAja3gSrykdEd-eRdWCKsd431efB-KeP1oWrjBEsWan5YfE_1rGIijjQLcMozRePiQDXTc2pd4slnNPCuuVLB9qJyXa_eSD-lipKE0oyfcrfZHYAwAG16jhxnz70RhC8O7Z0Y0MzxzoM3pScJHw13ozj9VXWhI6y091PgpIg9wQDdI-T_49UcT7e4cWpgXqtPtrdVMe8JpDux2whKrVFV6cSYs1XQkiZ3NhTQtajCKqzd9VVWLND6hN22fteIeqOSBZQ5375gTnZaQDlO2rC05UciNursf-v-3ZEHJLI2iHDP7wIlQ86QrOoNgSe_fizSBwrqiWK6GoYNQv9VuR_0S0" alt="Hình 23: Deployment diagram" />
+          </div>
+        </div>
       </section>
 
       <section class="slide" data-title="Cơ sở dữ liệu" data-notes="Cơ sở dữ liệu chính có bảy bảng: events, frames, sessions, captures, prints, settings và stickers. Các quan hệ xoay quanh session và frame.">
         <p class="chapter">3.2 Thiết kế cơ sở dữ liệu</p>
-        <h2>Các Bảng Dữ Liệu Chính</h2>
+        <h2>Các Bảng Dữ Liệu Chính & ERD</h2>
         <div class="db-grid">
           <div><b>photo_events</b><span>Sự kiện: name, description, folderPath, isActive.</span></div>
           <div><b>photo_frames</b><span>Frame: overlayUrl, slotCount, width, height, configJson.</span></div>
@@ -332,6 +472,15 @@
           <div><b>photo_prints</b><span>Ảnh final: finalPhotoPath, cloudFileId, uploadStatus, printCount.</span></div>
           <div><b>photo_settings</b><span>Cấu hình singleton: PIN, license, camera, Drive, printer, event mode.</span></div>
           <div><b>stickers</b><span>Sticker chỉnh sửa: name, imageUrl, isActive.</span></div>
+        </div>
+        <div class="diagram-card" style="margin-top: 18px;">
+          <div class="diagram-header">
+            <span class="diagram-title">Hình 22: Sơ đồ thực thể dữ liệu chính (ERD H2 Database)</span>
+            <button class="zoom-btn" type="button">🔍 Phóng to</button>
+          </div>
+          <div class="diagram-img-wrap">
+            <img src="https://www.plantuml.com/plantuml/svg/XPJ1Yjim48RlVWf1RuKS2eNIFQqJDjk59O6bz2fcfR6ZHj6OaPmbRFhkdJX9Qpc9rmU3PtuqtypyydrCmAdT-AA8QnSQODYeLp3hcgaDTaQUM7sQTqzF4LTWwSs5MbNW8_Oo5YjeVPfJI0lOe2hPWU_bIsPwEntxPVxruTltNfBH90YrnocnHRubQuGFwWz4O1BnkAIDQ21-S8w51AytL0M6vD9EDIjAf74hdr6z5qfzLiwgEpLzUdnQ_9JloKHUuJ2FE_MhV9dzA5yaO34QTaro5B9uHLvAwGRIAekxgAKhjpsSCbqkdn_AHV4dPwW46KSOEaQT9sYBx66dM_PPkUWfQICsI18-IWs5ojNwT-o8Py_BwH0WOepIpmX2H2zhHdja7R1SunEBfZRcasEPWZxDgLF_pnbFhHqqCu0qqAIMn-PqQcD0KZcFLzToxkdsOXfse-QuLJ20rwSJXdMFZNPCWn6qZIUm-c9m5xjAIUvmHjL3ahwEwzYGxLjEAhVCXyIrRNMDobOkt5w3zyWxVRXC5rxppc2G-1ft6Mzsi_RxoOJUCwUF2CvEBBARCIRvvzrCT3RBLT4-MsznZy7Ap_Gl" alt="Hình 22: ERD Diagram" />
+          </div>
         </div>
       </section>
 
@@ -349,28 +498,34 @@
             <tr><td>/api/admin/cleanup</td><td>POST</td><td>Dọn dữ liệu cũ sau khi xác thực PIN.</td></tr>
           </tbody>
         </table>
+        <div class="diagram-card" style="margin-top: 18px;">
+          <div class="diagram-header">
+            <span class="diagram-title">Hình 25: Sơ đồ phân tầng trách nhiệm backend Spring Boot</span>
+            <button class="zoom-btn" type="button">🔍 Phóng to</button>
+          </div>
+          <div class="diagram-img-wrap">
+            <img src="https://www.plantuml.com/plantuml/svg/XPJHRfj044NV-OeHVKqK9QfKDGzLR6nQLL5bnVs12JicAoyxQ7QnQrNzzmwKDAHT79uGz-nmxyp0NOWeiMjSbeMzzIqADl28rRuMxhmfsB70ktAu9aHuGiD7wslOeGiqKGpji7EnP1-_OKEm48jkeYz4-3YMlIxVhpzyd8X2LKHVErgo698vh5L_MBy1OHLPpYDTe0h36tKCHdoSeRBH2UI5vXLsZWJkyKIImyyCeEAcPKy-Ghwb42px5ov_hM_4-ZYh5jfAmVd3JnnvIp7gHCv3wmETUSs0b9gQPf65QQml7A7lsYdqwwKNMvA3hMYc4QFNeHiZcGoRreOsaQJ5pyowEokn1qe3Avtbw3qDtEiZ7sPEbzRHLfTAG_u59h4t9C66I7us-jVD0XwevM2rYgNGrtzUByY_tC1gsLVSiTDDKpDSeOE6ZCKSCC3AXdrMEUuCvEiVsWMlSj-EMZ1gDyD0gP8brl7oyjD_axc5fRxvWO8Qr8_uNtauaaXr2vh6njELF6Sv9S_sVXKMF5xjh7fDGcfNcM5c5_2TN1-ckG1ZQrlqD-sVWMTtv8t-fdu3" alt="Hình 25: Backend Layers" />
+          </div>
+        </div>
       </section>
 
       <section class="slide" data-title="BaseResponse" data-notes="BaseResponse chuẩn hóa response để frontend đọc thống nhất. Một số frontend có interceptor unwrap payload, giúp component nhận trực tiếp dữ liệu nghiệp vụ.">
-        <p class="chapter">3.3 Hợp đồng API</p>
-        <h2>Cấu Trúc Response Dùng Chung</h2>
-        <div class="code-tree">
-          <pre>{
-  "status": 1,
-  "message": "success",
-  "payload": {
-    "id": 996,
-    "status": "processing",
-    "cloudUrl": "https://web-save-photo.vercel.app/portfolio?id=..."
-  }
-}</pre>
+        <p class="chapter">3.3 Biểu đồ lớp hệ thống</p>
+        <h2>Class Diagram - Biểu Đồ Lớp Nghiệp Vụ</h2>
+        <div class="diagram-card">
+          <div class="diagram-header">
+            <span class="diagram-title">Hình 28: Biểu đồ lớp nghiệp vụ chính của hệ thống Photobooth</span>
+            <button class="zoom-btn" type="button">🔍 Phóng to</button>
+          </div>
+          <div class="diagram-img-wrap">
+            <img src="https://www.plantuml.com/plantuml/svg/bLR1Rjf04BtxArRqLYbHa2fLpQ4Aa51HfH6IsmyOl8DPiUoWsJKehVhl7HjGTcq3AITxvZ7pzitRaHzy00xLncQPNnkt1OQDMa2nBfagfoTaYTM7QVEB47u5clR6bMe9rcEKqRY4oeOfkV026rGZDc2Z_8YPziUom-cdfyzVeYHZ4S2L5iV46laSR2lyeBm2WY8GNuPK7WlmL-fe2B0uWufWXGNlHo6mMLG1PmMvtFn6TPSr2JLVKQ2d7RgW_cHA6NsldicLykX4fNkLon-RroLPQJE7i8g2ne-AO7Q26nDP12UnWX42wb6eAnLW7-NjfzbWzZTkEULw29TRqWxPmkiljb7GMmeJiO2Kdxc09R84zqRNlDu2ApJbAe78mPUc_Ex9NUIVaCpHUqEkJLEi6IeVSwgzMf-nVMIbqEd-X6RfEsr4dUceLc6fql6H4qOJs8QAEy8jZSNEQ7AqOblK_p-SkTJe-65f7DX3EktKC9uAWyldKAhQMWATjzNRrjrQ8ssD8OJwIfy8lGtL-CQwFqWd5cmg8h-aTYh1MkJNiToPb1VeZN5pqsCCIEGxaSg3ATR8LznhDh8AqaRlirkEl3C57ZCJgSgGnkQ7ywN1RqIoe1vhMwK9cJ5CwcxLDaqyowFpBNIiU9evqfl81cMgfOpPTA87tbrmL3vAPj4U6Wm7wkP63UvkRpyEecrn1NEabqNhvHhgTBzxSCUBTXOt74HN9Uj88x2llKDjYNKMrvQl0QPUw9SohfWCyGAyPOGUFkVRTr0jSvw3zTYrQzIEFDc3B5JvAlW7" alt="Hình 28: Class Diagram" />
+          </div>
         </div>
-        <p class="note">Các API upload dùng <code>multipart/form-data</code>; API cấu hình và điều khiển thiết bị dùng JSON body.</p>
       </section>
 
       <section class="slide" data-title="UI UX" data-notes="UI/UX được thiết kế theo từng route. Mục tiêu là giảm số lần chạm, nút lớn, phản hồi nhanh, tách rõ màn khách và màn admin.">
         <p class="chapter">3.4 Thiết kế giao diện</p>
-        <h2>Route Và Màn Hình Chính</h2>
+        <h2>Route Và Màn Hình Frontend Angular</h2>
         <div class="screen-grid">
           <div><b>/welcome</b><p>Màn chờ, Start, PIN admin, license.</p></div>
           <div><b>/layout</b><p>Chọn frame/layout cho Normal Mode.</p></div>
@@ -380,6 +535,15 @@
           <div><b>/print</b><p>Ảnh final, QR, chọn số bản, in ảnh.</p></div>
           <div><b>/setting</b><p>Camera, event, frame, designer, admin, theme.</p></div>
           <div><b>/portfolio</b><p>Web Gallery mobile cho khách tải ảnh.</p></div>
+        </div>
+        <div class="diagram-card" style="margin-top: 18px;">
+          <div class="diagram-header">
+            <span class="diagram-title">Hình 24: Sơ đồ điều hướng route và màn hình chính của Angular Frontend</span>
+            <button class="zoom-btn" type="button">🔍 Phóng to</button>
+          </div>
+          <div class="diagram-img-wrap">
+            <img src="https://www.plantuml.com/plantuml/svg/XPEzIWGn4CVxFCMWdI8Y2AAW-847WefeOI4Mu-xSRZ2NBFdmq1Umil0PH4ImiBuhB1JVOz_4N99Rz_pSPlyx_rzcCfFDkh6ehUi9nimvbnLgxC4PPkU5LaxcMqee3TETyBG8KsAk-bmMq4LXgENar4KdR4T9kuyzWWtDKRJy3QrLFwLTw2nkBostJ4sPHLa8sbGw9_qRLldzOV4FX9bL-c_46ShG_9CdHujdlr3CJyyIJCttIMIgHrE01ewZRZo1byhPOEq6sJWPLjRfk6ehwiQZ2v9nqVP8JSRdDHa_v4_xC7n_GZbFfXTDjD8yfJmOgIPko5f_bC4vYfgTp9p2tDnQqqnwXrYe22l0JL1xAgTLgzqa55lzGiMVfOsbUfuxsDc7iXxULI3guJLBwqTC6erdCW_SIEZwSo4s3eSj-JwJVr_1ssqzV00Zb6N1616XPOzqkKJ1hmZgmPqiMUobwIhEyQTCC0j5-VfOfU9jkZsJjCxoUl1IVQF6c-0obO-1rg2zYSugVnFygR3nT2O1yVxi8Ai7zmxAroUVPPraxg_m1m00" alt="Hình 24: Frontend Routes" />
+          </div>
         </div>
       </section>
 
@@ -394,6 +558,15 @@
           <div><b>05</b><span>Merge</span><p>Gộp vùng gần nhau.</p></div>
           <div><b>06</b><span>Output</span><p>LayoutSlot x,y,w,h,order.</p></div>
         </div>
+        <div class="diagram-card" style="margin-top: 18px;">
+          <div class="diagram-header">
+            <span class="diagram-title">Hình 26: Activity thuật toán nhận diện slot frame tự động bằng Canvas API</span>
+            <button class="zoom-btn" type="button">🔍 Phóng to</button>
+          </div>
+          <div class="diagram-img-wrap">
+            <img src="https://www.plantuml.com/plantuml/svg/XPF1RjD048RlVegHkAHIKDi8X4WADA4a0gKSKZWX3cDxurrbCsDsrqtx41L2Y0Et1Wv88Cv8yT4Ix-4tOPmW4HLAVThT_vlPsVd7XpwW2yNSHf6V6ShHuHnYJ6QPuuBInspPmQtX-jiYlCQK5uOocABrQaj9rHGB6uPCuJdE5VITGRkbzvtZnU-q-yCxJ-xTtnATIW9IPjM0NQhSTLWkzM5s0uH9OFT_fF0gGNz3dXG3njTGqRfxKNVCc0AVAcVn7CnSQkj5tIE7Yyq6JgjBXWJf53raTVak4Nca0Znjr2Ev02QZGRyNcIcqZZbLaElg4q6elYVwqGu4hGXQmI5vgKbHs8a0kdFqirVcDJm0jBb6E13EAQ_Pfhr8YIjDjimfHLVm4L1TVZ0GN5r-DA1_BWackuC_GGjjWheID6cFsWDu29sxUniGMh4L7_w97GWc5ALc6dLVac6wFJIKYd7UmpvabTneCLQszxVSQPvD6k9c_fe9Y_bCi6Fbf96oXaJNvNlAThDwzOM0D1RGsSiRPboN5ycQULDKIv7gyYrehbS_4jZGWQjBWdhrcRJm9-n2qrm6BSSPXBhy9bsflXAS5M8JPUrckpJWPIh550aq4lV2oGB6UCv5EB4S866QckoPP-h9I70U7ShRvQVw1G00" alt="Hình 26: Activity Slot Detection" />
+          </div>
+        </div>
       </section>
 
       <section class="slide" data-title="Finalize pipeline" data-notes="Pipeline finalize gồm load ảnh raw, đặt vào slot, vẽ overlay frame, vẽ QR layer, xuất JPEG final, gửi backend lưu và in/upload Drive.">
@@ -405,6 +578,18 @@
           <div><b>03</b><span>Overlay</span><p>Vẽ frame PNG lên canvas.</p></div>
           <div><b>04</b><span>QR layer</span><p>Nhúng link gallery vào ảnh.</p></div>
           <div><b>05</b><span>Finalize</span><p>POST /api/print/finalize.</p></div>
+          <div><b>06</b><span>Worker</span><p>In ngầm và upload Drive.</p></div>
+        </div>
+        <div class="diagram-card" style="margin-top: 18px;">
+          <div class="diagram-header">
+            <span class="diagram-title">Hình 27: Pipeline ghép Canvas 300DPI, in PDFBox và đồng bộ Drive</span>
+            <button class="zoom-btn" type="button">🔍 Phóng to</button>
+          </div>
+          <div class="diagram-img-wrap">
+            <img src="https://www.plantuml.com/plantuml/svg/XPJFRjD04CRlVefHkO20HaX8Y1vGKvgK2bG2JIHkQB8UnqlMksR_aAfNZfnuX8ep4kVaYCHx-4qOhvrYewRroTxlDpFVpenyw3nQ7mgL96ufTOaM2vYZM2wi2JfzQPInS6ySdmxXSapDIke5PAWSTPIKCWpAZutsPrWG3Ar4rT67rffLc_R9-EdesVEEQ4bur0j5HyQcP7TX9Vl3nHqG2c_ixKXm9D3TaIT5Z_CTL1ABmDxh_FULoFS07Pm4SZxXK2-5B55xLgLnIvYTHZr-zFKZlWxfDChjUn-OMAazMHXTa0XSC9BnS7JH9u-j_49zBXxzpvqOmrrkj7zK4it3unUDIpY03tmlq7cr_gcXMl_GEOXGRRxBf06OR0qpEtbxFeK1bd9GrjO6cTIev2KbMwH7l_dpAq14G1OyJ7W8mXIb8ayfE79E6drpvBHQNvc1O4zbOyt393VUn8Oag3mC-V8GJS2yrXE0JgQsSPpfSw10yVD-9XKzQcB8Fk20BTKBc9WLsVESb8Bziz6qKOwD20LnwNfkTVbPgGocJKjlCj1EXFEvC2-aXn03fgOP0bm3MvR9KF8UKjkmKg6Wt2ZUnrrqT61n1G9B7oovMzD-B53BZ6U__ybns-kBNFljR4DipsbQZqgPaCwisku1Gytk7C0hMMs-Ql1vjVa6xzuFPBivoI6dun_DNm00" alt="Hình 27: Pipeline Print & Drive" />
+          </div>
+        </div>
+      </section>
           <div><b>06</b><span>Worker</span><p>In ngầm và upload Drive.</p></div>
         </div>
       </section>
