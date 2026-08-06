@@ -440,24 +440,37 @@
         </div>
       </section>
 
-      <section class="slide section-slide" data-title="Chương III" data-notes="Chương III trình bày thiết kế hệ thống: kiến trúc, cơ sở dữ liệu, API, giao diện, mã nguồn và thuật toán.">
+      <section class="slide section-slide" data-title="Chương III" data-notes="Chương III trình bày cách thiết kế hệ thống theo mã nguồn thực tế: Kiosk chạy local, backend xử lý nghiệp vụ và thiết bị, còn Web Gallery/Google Drive phục vụ nhận ảnh online.">
         <span>03</span>
         <h2>Thiết Kế Hệ Thống</h2>
-        <p>Từ kiến trúc phân hệ đến dữ liệu, API và thuật toán xử lý ảnh.</p>
+        <p>Thiết kế theo hướng local-first: chụp và in ổn định tại máy sự kiện, đồng bộ cloud chỉ phục vụ chia sẻ ảnh.</p>
       </section>
 
-      <section class="slide" data-title="Kiến trúc tổng thể" data-notes="Backend Spring Boot chạy cục bộ, dùng H2 và thư mục media. Angular Kiosk giao tiếp localhost. Web Gallery tách khỏi Kiosk và chạy public trên Vercel.">
+      <section class="slide" data-title="Nguyên tắc thiết kế" data-notes="Hệ thống được thiết kế theo bốn nguyên tắc: ưu tiên chạy local tại sự kiện, tách rõ thiết bị qua adapter, chuẩn hóa dữ liệu qua API và chỉ dùng cloud cho chia sẻ ảnh.">
+        <p class="chapter">3.1 Định hướng thiết kế</p>
+        <h2>Nguyên Tắc Thiết Kế Chính</h2>
+        <div class="theory-list">
+          <div><b>Local-first</b><p>Kiosk và backend chạy trên cùng máy để luồng chụp/in không phụ thuộc Internet.</p></div>
+          <div><b>Tách vai trò</b><p>Frontend lo trải nghiệm cảm ứng và Canvas; backend lo session, file, thiết bị, in, Drive.</p></div>
+          <div><b>Adapter thiết bị</b><p>Webcam, DSLR và máy in được bọc qua service riêng để dễ thay đổi cấu hình.</p></div>
+          <div><b>Dữ liệu tập trung</b><p>H2 lưu cấu hình, session, frame, print; ảnh raw/final lưu ở thư mục media local.</p></div>
+          <div><b>Cloud có giới hạn</b><p>Google Drive và Gallery chỉ dùng để khách nhận ảnh số sau khi ảnh đã được tạo.</p></div>
+          <div><b>Dễ demo bảo vệ</b><p>Các luồng chính tách rõ: Event Mode, Normal Mode, Gallery, Admin, License.</p></div>
+        </div>
+      </section>
+
+      <section class="slide" data-title="Kiến trúc tổng thể" data-notes="Kiến trúc thật gồm ba khối chính: máy Kiosk local, backend local và cụm chia sẻ online. Backend Spring Boot chạy cổng 8080, Angular Kiosk chạy 4200 hoặc Electron fullscreen, Gallery chạy public trên Vercel.">
         <p class="chapter">3.1 Kiến trúc tổng thể</p>
-        <h2>Kiến Trúc Offline-First + Online Gallery</h2>
+        <h2>Kiến Trúc Local Kiosk + Online Gallery</h2>
         <div class="architecture">
-          <div class="node primary">Electron Kiosk<br><small>Fullscreen touch UI</small></div>
-          <div class="node primary">Angular Frontend<br><small>Routes + Canvas</small></div>
-          <div class="node primary">Spring Boot API<br><small>Session + Device + Print</small></div>
-          <div class="node">H2 File DB<br><small>Settings, events, sessions</small></div>
-          <div class="node">Local Media<br><small>Raw + final images</small></div>
-          <div class="node">digiCamControl<br><small>HTTP Camera API</small></div>
-          <div class="node">Google Drive<br><small>Cloud storage</small></div>
-          <div class="node">Vercel Gallery<br><small>Public mobile album</small></div>
+          <div class="node primary">Kiosk UI<br><small>Angular 20 / Electron</small></div>
+          <div class="node primary">Backend Local<br><small>Spring Boot 4 - port 8080</small></div>
+          <div class="node primary">Canvas Engine<br><small>Render slot, frame, QR</small></div>
+          <div class="node">H2 File DB<br><small>Config, event, session, print</small></div>
+          <div class="node">Local Media<br><small>PhotoBoothData raw/final</small></div>
+          <div class="node">Device Adapter<br><small>Webcam, DSLR, Printer</small></div>
+          <div class="node">Google Drive<br><small>Folder, ảnh, manifest</small></div>
+          <div class="node">Vercel Gallery<br><small>/portfolio + /api/drive</small></div>
         </div>
         <div class="diagram-card" style="margin-top: 18px;">
           <div class="diagram-header">
@@ -470,17 +483,17 @@
         </div>
       </section>
 
-      <section class="slide" data-title="Cơ sở dữ liệu" data-notes="Cơ sở dữ liệu chính có bảy bảng: events, frames, sessions, captures, prints, settings và stickers. Các quan hệ xoay quanh session và frame.">
+      <section class="slide" data-title="Cơ sở dữ liệu" data-notes="Thiết kế dữ liệu xoay quanh session chụp. Event và frame quyết định cấu hình đầu vào, session sinh capture raw, print lưu ảnh final và thông tin Drive, setting là bảng cấu hình singleton.">
         <p class="chapter">3.2 Thiết kế cơ sở dữ liệu</p>
-        <h2>Các Bảng Dữ Liệu Chính & ERD</h2>
+        <h2>Thiết Kế Dữ Liệu Theo Vòng Đời Phiên Chụp</h2>
         <div class="db-grid">
-          <div><b>photo_events</b><span>Sự kiện: name, description, folderPath, isActive.</span></div>
-          <div><b>photo_frames</b><span>Frame: overlayUrl, slotCount, width, height, configJson.</span></div>
-          <div><b>photo_sessions</b><span>Phiên chụp: selectedFrame, event, status, driveFolderId, cloudUrl.</span></div>
-          <div><b>photo_captures</b><span>Ảnh raw từng slot: session, filePath, isSelected.</span></div>
-          <div><b>photo_prints</b><span>Ảnh final: finalPhotoPath, cloudFileId, uploadStatus, printCount.</span></div>
-          <div><b>photo_settings</b><span>Cấu hình singleton: PIN, license, camera, Drive, printer, event mode.</span></div>
-          <div><b>stickers</b><span>Sticker chỉnh sửa: name, imageUrl, isActive.</span></div>
+          <div><b>photo_events</b><span>Nhóm sự kiện, trạng thái active và thư mục lưu ảnh theo event.</span></div>
+          <div><b>photo_frames</b><span>Overlay, số slot, kích thước in, cấu hình vị trí ảnh bằng configJson.</span></div>
+          <div><b>photo_sessions</b><span>Trung tâm luồng chụp: mode, frame, status, Drive folder và cloudUrl.</span></div>
+          <div><b>photo_captures</b><span>Lưu ảnh raw từng slot để retake, edit và render final.</span></div>
+          <div><b>photo_prints</b><span>Lưu ảnh final, số bản in, trạng thái upload và cloudFileId.</span></div>
+          <div><b>photo_settings</b><span>Cấu hình hệ thống: PIN, license, camera, printer, Drive, event mode.</span></div>
+          <div><b>stickers</b><span>Tài nguyên trang trí cho màn edit, bật/tắt theo trạng thái active.</span></div>
         </div>
         <div class="diagram-card" style="margin-top: 18px;">
           <div class="diagram-header">
@@ -493,18 +506,18 @@
         </div>
       </section>
 
-      <section class="slide" data-title="API backend" data-notes="Tất cả API backend trả về BaseResponse gồm status, message và payload. Các nhóm API chính gồm config, sessions, camera, print, events, frames và cleanup.">
+      <section class="slide" data-title="API backend" data-notes="API backend được thiết kế theo nhóm nghiệp vụ. Frontend gọi API qua localhost; response chuẩn hóa bằng BaseResponse để component đọc thống nhất qua interceptor.">
         <p class="chapter">3.3 Thiết kế API</p>
-        <h2>API Chính Của Backend</h2>
+        <h2>Nhóm API Theo Nghiệp Vụ</h2>
         <table class="data-table">
-          <thead><tr><th>Endpoint</th><th>Method</th><th>Chức năng</th></tr></thead>
+          <thead><tr><th>Nhóm API</th><th>Endpoint chính</th><th>Vai trò trong hệ thống</th></tr></thead>
           <tbody>
-            <tr><td>/api/config</td><td>GET/PUT</td><td>Đọc và cập nhật cấu hình Kiosk.</td></tr>
-            <tr><td>/api/sessions/start</td><td>POST</td><td>Khởi tạo phiên chụp theo frame.</td></tr>
-            <tr><td>/api/sessions/{id}/upload-raw</td><td>POST</td><td>Lưu ảnh raw webcam.</td></tr>
-            <tr><td>/api/camera/*</td><td>GET/POST/PUT</td><td>Diagnostic, liveview, property, capture DSLR.</td></tr>
-            <tr><td>/api/print/finalize</td><td>POST</td><td>Lưu ảnh final, tạo print record, upload Drive.</td></tr>
-            <tr><td>/api/admin/cleanup</td><td>POST</td><td>Dọn dữ liệu cũ sau khi xác thực PIN.</td></tr>
+            <tr><td>Cấu hình</td><td><code>/api/config</code></td><td>Đọc/cập nhật setting, PIN, license, Drive, printer, event mode.</td></tr>
+            <tr><td>Event & Frame</td><td><code>/api/config/events</code>, <code>/api/config/frames</code></td><td>Quản lý sự kiện, frame, overlay và layout slot.</td></tr>
+            <tr><td>Session</td><td><code>/api/sessions/start</code>, <code>/api/sessions/{id}</code></td><td>Tạo phiên chụp, lấy lại dữ liệu session, lưu raw webcam/DSLR.</td></tr>
+            <tr><td>Camera</td><td><code>/api/camera/*</code></td><td>Kiểm tra, liveview, chỉnh property, capture DSLR qua digiCamControl.</td></tr>
+            <tr><td>Print & Drive</td><td><code>/api/print/finalize</code>, <code>/api/print/execute</code></td><td>Lưu ảnh final, tạo print record, in ảnh và upload Google Drive.</td></tr>
+            <tr><td>Vận hành</td><td><code>/api/history</code>, <code>/api/admin/cleanup</code></td><td>Xem lịch sử và dọn session/media cũ sau khi xác thực PIN.</td></tr>
           </tbody>
         </table>
         <div class="diagram-card" style="margin-top: 18px;">
@@ -518,8 +531,8 @@
         </div>
       </section>
 
-      <section class="slide" data-title="BaseResponse" data-notes="BaseResponse chuẩn hóa response để frontend đọc thống nhất. Một số frontend có interceptor unwrap payload, giúp component nhận trực tiếp dữ liệu nghiệp vụ.">
-        <p class="chapter">3.3 Biểu đồ lớp hệ thống</p>
+      <section class="slide" data-title="Biểu đồ lớp" data-notes="Biểu đồ lớp tập trung vào các entity nghiệp vụ chính: event, frame, session, capture, print, setting và sticker. Quan hệ quan trọng nhất là session liên kết frame/event và sinh capture/print.">
+        <p class="chapter">3.4 Biểu đồ lớp hệ thống</p>
         <h2>Class Diagram - Biểu Đồ Lớp Nghiệp Vụ</h2>
         <div class="diagram-card">
           <div class="diagram-header">
@@ -532,18 +545,18 @@
         </div>
       </section>
 
-      <section class="slide" data-title="UI UX" data-notes="UI/UX được thiết kế theo từng route. Mục tiêu là giảm số lần chạm, nút lớn, phản hồi nhanh, tách rõ màn khách và màn admin.">
-        <p class="chapter">3.4 Thiết kế giao diện</p>
-        <h2>Route Và Màn Hình Frontend Angular</h2>
+      <section class="slide" data-title="UI UX" data-notes="UI/UX được thiết kế theo từng route thực tế của Angular Kiosk. Các màn dành cho khách ưu tiên nút lớn và ít thao tác; màn setting dành cho admin có PIN và chia nhóm cấu hình.">
+        <p class="chapter">3.5 Thiết kế giao diện</p>
+        <h2>Thiết Kế Màn Hình Theo Luồng Sử Dụng</h2>
         <div class="screen-grid">
-          <div><b>/welcome</b><p>Màn chờ, Start, PIN admin, license.</p></div>
-          <div><b>/layout</b><p>Chọn frame/layout cho Normal Mode.</p></div>
-          <div><b>/capture</b><p>Live camera, countdown, retake, chuyển edit.</p></div>
-          <div><b>/event</b><p>Chọn frame sự kiện, chụp nhanh theo slot.</p></div>
-          <div><b>/edit</b><p>Canvas preview, filter, sticker, text, QR.</p></div>
-          <div><b>/print</b><p>Ảnh final, QR, chọn số bản, in ảnh.</p></div>
-          <div><b>/setting</b><p>Camera, event, frame, designer, admin, theme.</p></div>
-          <div><b>/portfolio</b><p>Web Gallery mobile cho khách tải ảnh.</p></div>
+          <div><b>/welcome</b><p>Màn khởi động kiosk, nút Start, vào admin bằng PIN và kiểm tra license.</p></div>
+          <div><b>/layout</b><p>Normal Mode: chọn frame/layout trước khi tạo session.</p></div>
+          <div><b>/capture</b><p>Chụp thường: live camera, countdown, retake, sang edit.</p></div>
+          <div><b>/event</b><p>Event Mode: chọn frame active, chụp nhanh theo slot, giảm thao tác khách.</p></div>
+          <div><b>/edit</b><p>Chỉnh ảnh bằng Canvas: filter, sticker, text, frame và QR layer.</p></div>
+          <div><b>/print</b><p>Xem ảnh final, chọn số bản, in và hiển thị QR nhận ảnh.</p></div>
+          <div><b>/setting</b><p>Admin: camera, event, frame, designer, theme, PIN, Drive và máy in.</p></div>
+          <div><b>/portfolio</b><p>Web Gallery mobile: mở bằng QR, xem album và tải ảnh.</p></div>
         </div>
         <div class="diagram-card" style="margin-top: 18px;">
           <div class="diagram-header">
@@ -556,8 +569,8 @@
         </div>
       </section>
 
-      <section class="slide" data-title="Thuật toán slot" data-notes="Theo tài liệu, thuật toán nhận diện slot hiện tại được hiệu chỉnh theo code thực tế: dùng Canvas ImageData và Union-Find, không phụ thuộc OpenCV.js trong luồng chính.">
-        <p class="chapter">3.5 Thuật toán xử lý ảnh</p>
+      <section class="slide" data-title="Thuật toán slot" data-notes="Thuật toán slot phục vụ phần designer/frame: đọc pixel từ Canvas ImageData, tạo mask theo alpha/RGB, dùng Union-Find để gom vùng liên thông rồi xuất LayoutSlot lưu vào configJson.">
+        <p class="chapter">3.6 Thuật toán xử lý ảnh</p>
         <h2>Nhận Diện Slot Frame Bằng Canvas API</h2>
         <div class="timeline">
           <div><b>01</b><span>Input</span><p>PNG overlay hoặc ảnh nền.</p></div>
@@ -578,8 +591,8 @@
         </div>
       </section>
 
-      <section class="slide" data-title="Finalize pipeline" data-notes="Pipeline finalize gồm load ảnh raw, đặt vào slot, vẽ overlay frame, vẽ QR layer, xuất JPEG final, gửi backend lưu và in/upload Drive.">
-        <p class="chapter">3.5 Pipeline xử lý ảnh</p>
+      <section class="slide" data-title="Finalize pipeline" data-notes="Pipeline finalize là điểm nối frontend và backend: Canvas tạo ảnh final, backend lưu print record, sau đó in ảnh và upload Drive bằng tác vụ nền để không làm chậm giao diện kiosk.">
+        <p class="chapter">3.7 Pipeline xử lý ảnh</p>
         <h2>Ghép Ảnh, In Và Đồng Bộ Drive</h2>
         <div class="timeline">
           <div><b>01</b><span>Load ảnh</span><p>Ảnh raw từ Object URL hoặc /media.</p></div>
@@ -599,24 +612,21 @@
           </div>
         </div>
       </section>
-          <div><b>06</b><span>Worker</span><p>In ngầm và upload Drive.</p></div>
-        </div>
-      </section>
 
-      <section class="slide" data-title="Cấu trúc mã nguồn" data-notes="Mã nguồn chia thành ba project độc lập: backend local, frontend kiosk và Web Gallery public.">
-        <p class="chapter">3.6 Cấu trúc mã nguồn</p>
-        <h2>Ba Project Chính</h2>
+      <section class="slide" data-title="Cấu trúc mã nguồn" data-notes="Mã nguồn chia thành ba project độc lập đúng vai trò triển khai: backend local, frontend kiosk và Web Gallery public. Cách tách này giúp demo, đóng gói và deploy từng phần rõ ràng.">
+        <p class="chapter">3.8 Cấu trúc mã nguồn</p>
+        <h2>Cấu Trúc Ba Project Chính</h2>
         <div class="code-tree">
           <pre>datn/
 ├─ photobooth/              Backend Spring Boot
-│  ├─ controller/           API config, session, camera, print, cleanup
-│  ├─ service/              Nghiệp vụ Drive, camera, in, license, file
-│  ├─ entity/               photo_events, frames, sessions, captures, prints
+│  ├─ controller/           REST API: config, session, camera, print, cleanup
+│  ├─ service/              Nghiệp vụ: Drive, camera, printer, license, file
+│  ├─ entity/               Event, Frame, Session, Capture, Print, Setting
 │  └─ repository/           JPA repositories
 ├─ photobooth-frontend/     Angular Kiosk + Electron shell
 │  ├─ page/                 welcome, layout, capture, event, edit, print, setting
 │  ├─ services/             photo, camera, setting, layout-analysis
-│  └─ core/                 language, interceptor
+│  └─ core/                 language service, API response interceptor
 └─ luxe-agency-vn/          Web Gallery Angular + Vercel
    ├─ features/event-gallery
    ├─ features/portfolio
